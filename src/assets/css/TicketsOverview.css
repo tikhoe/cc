@@ -1,0 +1,93 @@
+.ticketsOverview .currentlyBeingServed {
+    width:100%;
+    height: auto;
+    margin-bottom: 30px;
+
+}
+
+.ticketsOverview .currentlyBeingServed .counter {
+    font-size: 60px;
+    font-weight: bold;
+    color: #0A0914;
+}
+
+.ticketsOverview .currentlyBeingServed .indicators {
+    width: 60px;
+    height: 46px;
+    margin: 14px 0 0 17px;
+}
+
+.ticketsOverview .currentlyBeingServed .title {
+    font-size: 22px;
+    font-weight: 400;
+    color: #929298;
+    margin: 8px 0 0 17px;
+}
+
+
+.ticketsOverview .usersListContainer .user-list .status-badge {
+    right: -1px;
+    top: -1px;
+}
+
+.ticketsOverview .usersListContainer .user-list {
+    height: 34px;
+    margin-bottom: 5px;
+}
+
+.ticketsOverview .usersListContainer .user-list .user-image-text {
+    width: 38px;
+    border-radius: 6px;
+    background-color: #fff;
+    font-size: 13px;
+    height: 26px;
+    line-height: 26px;
+}
+
+.ticketsOverview .usersListContainer .user-list .user-name-and-pic > div > p {
+    width: 115px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 13px;
+}
+
+
+
+.ticketsOverview .usersListContainer .user-list .user-name-and-pic {
+    width: auto;
+    float: left;
+
+    display: block;
+}
+
+.ticketsOverview .usersListContainer .user-list .user-list-content {
+    width: 120px;
+    float: left;
+}
+
+.ticketsOverview .usersListContainer .user-list .user-list-content > p {
+    width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-left: 20px;
+    font-size: 13px;
+}
+
+.ticketsOverview .usersListContainer .user-list .ticketTag {
+    width: 4px;
+    height: 38px;
+    position: absolute;
+    left: -10px;
+    border-radius: 0 4px 4px 0;
+}
+
+.ticketsOverview .usersListContainer .user-list {
+    background-color: #f3f3f3;
+}
+
+.ticketsOverview .usersListContainer {
+    /* max-height: 600px;
+    overflow-y: scroll; */
+}

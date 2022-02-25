@@ -1,0 +1,44 @@
+.quickInfo {
+    width: 400px;
+    float: left;
+}
+
+.quickInfo > div {
+    margin-bottom: 15px;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 10px;
+}
+
+.quickInfo .home-left-content3-bottom > div h5 {
+    font-size: 12px;
+}
+
+.quickInfo .home-left-content3-bottom > div > div h3 {
+    font-size: 24px;
+}
+
+
+.quickInfo .quickAlerts {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    padding: 10px;
+    background-color: unset
+}
+
+.quickInfo .quickAlerts h5 {
+    color: #fff;
+}
+
+.quickInfo .quickAlerts p {
+    color: #fff;
+    font-size: 15px;
+    margin: 0;
+}
+.quickInfo .quickAlerts p.count {
+    font-size: 24px;
+    font-weight: 600;
+    color: #f0f0f6;
+}

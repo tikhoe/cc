@@ -1,7 +1,9 @@
 import React from 'react';
 
 // components
-import Queuing from '../components/Queuing.js'
+
+import Sidebar from "../components/queuing/Sidebar";
+import Content from "../components/queuing/Content";
 import '../assets/css/Layout.css'
 
 class Layout extends React.Component {
@@ -9,7 +11,10 @@ class Layout extends React.Component {
 
         return (
             <div className="wrapper">
-                <Queuing children={this.props.children} />
+                <div className="wrapper">
+                    <Sidebar />
+                    <Content children={this.props.children} />
+                </div>
             </div>
         )   
     }

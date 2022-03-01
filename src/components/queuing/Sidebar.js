@@ -1,13 +1,12 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
 
 // components
 import MyServices from './sidebar/MyServices';
 
 class Sidebar extends React.Component {
+    
     render(){
-        
-
         return (
             <nav id="sidebar">
                 <div className="sidebar-header">

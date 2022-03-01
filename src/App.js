@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Route,
   Navigate,
-  Switch,
+  Routes,
 } from "react-router-dom";
 
 import Layout from "./pages/Layout";
@@ -17,12 +17,13 @@ class App extends React.Component {
   render() {
     return <Router>
       <Layout>
-        <Route exact path="/ds/" component={DS} />
-        <Route exact path="/qm/" component={QM} />
-        <Route exact path="/cf/" component={CF} />
-        <Route exact path="/admin/" component={Admin} />
-        <Navigate exact from="/" to="/ds/" />
-      </Layout>;
+          <Routes>
+              <Route exact path="/ds/" element={<DS/>} />
+              <Route exact path="/qm/" element={<QM/>} />
+              <Route exact path="/cf/" element={<CF/>} />
+              <Route exact path="/admin/" element={<Admin/>} />
+          </Routes>
+        </Layout>;
     </ Router>
   }
 }

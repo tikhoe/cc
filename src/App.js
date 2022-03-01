@@ -23,7 +23,6 @@ class App extends React.Component {
               <Route exact path="/cf/" element={<CF/>} />
               <Route exact path="/admin/" element={<Admin/>} />
           </Routes>
-          <Navigate exact from="/" to="/ds/" />
         </Layout>;
     </ Router>
   }

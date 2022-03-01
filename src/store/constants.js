@@ -80,3 +80,30 @@ export const navigation = [
 
     }
 ]
+
+export const apps = [
+    {
+        name:"Digital Signage",
+        slug:"/ds/",
+        icon:"",
+        settings:{}
+    },
+    {
+        name:"Queue Management",
+        slug:"/qm/",
+        icon:"",
+        settings:{}
+    },
+    {
+        name:"Customer Feedback",
+        slug:"/cf/",
+        icon:"",
+        settings:{}
+    },
+    {
+        name:"Admin",
+        slug:"/admin/",
+        icon:"",
+        settings:{}
+    }
+]

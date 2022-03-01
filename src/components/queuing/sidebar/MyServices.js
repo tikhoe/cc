@@ -1,13 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 // components
 
-function MyServices(props){
+const MyServices =(props)=>{
 
     const apps = ["Digital Signage", "Queue Management", "Customer Feedback", "Admin"]
     const myApps = apps.length
         ?   apps.map( ( data, index ) => 
-                <div key={ index }>{ data }</div>
+                <Link to="/qm/" key={ index }>{ data }</Link>
             )
         :   <div>There are no apps available for you.</div>
 

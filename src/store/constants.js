@@ -104,20 +104,56 @@ export const navigation = [
         path: '/admin',
         menuItems: [
             {
-                name: 'Dashboard',
-                path: '/dashboard',
+                name: 'Organizations',
+                path: '/organizations',
                 icon: 'bar-chart-outline',
                 status: 1
             },
             {
-                name: 'Services',
-                path: '/services',
-                icon: 'apps-outline',
+                name: 'Endpoints',
+                path: '/endpoints',
+                icon: 'play-outline',
+                status: 1
+            },
+            {
+                name: 'Branches',
+                path: '/branches',
+                icon: 'business-outline',
+                status: 1
+            },
+            {
+                name: 'Audiences',
+                path: '/towns',
+                icon: 'earth-outline',
+                status: 1
+            }, {
+                name: 'Towns',
+                path: '/towns',
+                icon: 'paper-plane-outline',
+                status: 1
+            }
+            ,
+            {
+                name: 'Regions',
+                path: '/regions',
+                icon: 'paper-plane-outline',
+                status: 1
+            },
+            {
+                name: 'Countries',
+                path: '/countries',
+                icon: 'paper-plane-outline',
+                status: 1
+            },
+            {
+                name: 'Users',
+                path: '/users',
+                icon: 'people-outline',
                 status: 1
             },
             {
                 name: 'Settings',
-                path: '/dashboard',
+                path: '/settings',
                 icon: 'settings-outline',
                 status: 1
             }

@@ -1,5 +1,6 @@
 import {
-  MODAL_UPDATE
+  MODAL_UPDATE,
+  UPDATE_CURRENT_APP
 } from '../actions/types';
 
 const initialState = {
@@ -8,6 +9,8 @@ const initialState = {
         content: null,
         modalType: 1
     },
+    currentApp:"ds"
+    
 };
 
 export default function reducerCase(state = initialState, action) {
@@ -21,6 +24,11 @@ export default function reducerCase(state = initialState, action) {
             content: action.payload.content
         }
       };
+    case UPDATE_CURRENT_APP:
+      return {
+        ...state,
+        currentApp: action.payload.currentApp
+      }
     default:
       return state;
   }

@@ -1,5 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { updateCurrentApp } from '../../store/actions/settingsActions';
 
 // components
 import MyServices from './sidebar/MyServices';
@@ -7,6 +9,8 @@ import MyServices from './sidebar/MyServices';
 class Sidebar extends React.Component {
     
     render(){
+        const { currentApp, updateCurrentApp } = this.props;
+            console.log(currentApp, updateCurrentApp)
         return (
             <nav id="sidebar">
                 <div className="sidebar-header">
@@ -26,6 +30,7 @@ class Sidebar extends React.Component {
                 </div>
 
                 <ul className="list-unstyled components">
+
                     <li className="active">
                         <NavLink to='/queuing/tickets/'>
                             <ion-icon name="home-outline"></ion-icon>
@@ -57,6 +62,17 @@ class Sidebar extends React.Component {
         )
     }
 }
-  
-export default Sidebar
+
+const mapStateToProps = state => {
+    const { settings } = state
+    return {
+        currentApp: settings.currentApp,
+  }
+}
+ 
+export default connect(mapStateToProps, 
+    { 
+        updateCurrentApp,
+    }
+)(Sidebar);
 

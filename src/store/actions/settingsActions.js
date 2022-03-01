@@ -11,7 +11,7 @@ export const modalUpdate = (payload) => dispatch => {
   })
 };
 
-export const updateDateCurrentApp = (payload) => dispatch => {
+export const updateCurrentApp = (payload) => dispatch => {
   dispatch({
     type: UPDATE_CURRENT_APP,
     payload

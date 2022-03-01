@@ -1,3 +1,5 @@
+import { useLocation } from 'react-router-dom';
+
 export const PubSubKeys = {
     createTicket: {
         exchange: "tickets",
@@ -42,7 +44,31 @@ export const navigation = [
             {
                 name: 'Dashboard',
                 path: '/dashboard',
-                icon: 'home-outline',
+                icon: 'bar-chart-outline',
+                status: 1
+            },
+            {
+                name: 'Media Storage',
+                path: '/dashboard',
+                icon: 'cloud-upload-outline',
+                status: 1
+            },
+            {
+                name: 'Scheduled content',
+                path: '/dashboard',
+                icon: 'videocam-outline',
+                status: 1
+            },
+            {
+                name: 'Widgets',
+                path: '/dashboard',
+                icon: 'apps-outline',
+                status: 1
+            },
+            {
+                name: 'Settings',
+                path: '/dashboard',
+                icon: 'settings-outline',
                 status: 1
             }
         ]
@@ -55,27 +81,21 @@ export const navigation = [
             {
                 name: 'Dashboard',
                 path: '/dashboard',
-                icon: 'home-outline',
-                status: 1
-            },
-            {
-                name: 'Analytics',
-                path: '/analytics',
                 icon: 'bar-chart-outline',
-                status: 1
-            },
-            {
-                name: 'Agents',
-                path: '/agents',
-                icon: 'people-outline',
                 status: 1
             },
             {
                 name: 'Services',
                 path: '/services',
-                icon: 'grid-outline',
+                icon: 'apps-outline',
                 status: 1
             },
+            {
+                name: 'Settings',
+                path: '/dashboard',
+                icon: 'settings-outline',
+                status: 1
+            }
         ]
 
     }
@@ -86,24 +106,20 @@ export const Apps = [
         name:"Digital Signage",
         slug:"/ds/",
         icon:"",
-        settings:{}
     },
     {
         name:"Queue Management",
         slug:"/qm/",
         icon:"",
-        settings:{}
     },
     {
         name:"Customer Feedback",
         slug:"/cf/",
         icon:"",
-        settings:{}
     },
     {
         name:"Admin",
         slug:"/admin/",
         icon:"",
-        settings:{}
     }
 ]

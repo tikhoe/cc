@@ -81,7 +81,7 @@ export const navigation = [
     }
 ]
 
-export const apps = [
+export const Apps = [
     {
         name:"Digital Signage",
         slug:"/ds/",

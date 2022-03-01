@@ -98,6 +98,31 @@ export const navigation = [
             }
         ]
 
+    },
+    {
+        app: 'admin',
+        path: '/admin',
+        menuItems: [
+            {
+                name: 'Dashboard',
+                path: '/dashboard',
+                icon: 'bar-chart-outline',
+                status: 1
+            },
+            {
+                name: 'Services',
+                path: '/services',
+                icon: 'apps-outline',
+                status: 1
+            },
+            {
+                name: 'Settings',
+                path: '/dashboard',
+                icon: 'settings-outline',
+                status: 1
+            }
+        ]
+
     }
 ]
 

@@ -1,4 +1,4 @@
-git import { 
+import { 
   FETCH_ORGANIZATIONS,
   FETCH_BRANCHES,
   UPDATE_ORGANIZATION,

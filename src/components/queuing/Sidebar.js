@@ -38,7 +38,7 @@ class Sidebar extends React.Component {
                             <li key={ index }>
                                 <NavLink to={appMenuItems.path +""+ menuItem.path}>
                                     <ion-icon name={menuItem.icon}></ion-icon>
-                                    {currentApp}
+                                    {menuItem.name}
                                 </NavLink>
                             </li>      
                         )

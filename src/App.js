@@ -18,10 +18,10 @@ class App extends React.Component {
     return <Router>
       <Layout>
           <Routes>
-              <Route exact path="/ds/" element={<DS/>} />
-              <Route exact path="/qm/" element={<QM/>} />
-              <Route exact path="/cf/" element={<CF/>} />
-              <Route exact path="/admin/" element={<Admin/>} />
+              <Route path="/ds/:page/" element={<DS/>} />
+              <Route path="/qm/" element={<QM/>} />
+              <Route path="/cf/" component={CF} />
+              <Route path="/admin/" component={Admin} />
           </Routes>
         </Layout>;
     </ Router>

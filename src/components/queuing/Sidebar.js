@@ -1,5 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { updateCurrentApp } from '../../store/actions/settingsActions';
+import { navigation } from '../../store/constants';
 
 // components
 import MyServices from './sidebar/MyServices';
@@ -7,6 +10,10 @@ import MyServices from './sidebar/MyServices';
 class Sidebar extends React.Component {
     
     render(){
+        const { currentApp, updateCurrentApp } = this.props;
+
+        const appMenuItems = navigation.find( n => n.app === currentApp)
+
         return (
             <nav id="sidebar">
                 <div className="sidebar-header">
@@ -26,24 +33,16 @@ class Sidebar extends React.Component {
                 </div>
 
                 <ul className="list-unstyled components">
-                    <li className="active">
-                        <NavLink to='/queuing/tickets/'>
-                            <ion-icon name="home-outline"></ion-icon>
-                            Home
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to='/queuing/analytics/'>
-                            <ion-icon name="bar-chart-outline"></ion-icon>
-                            Analytics
-                        </NavLink>
-                    </li>
-                     <li>
-                        <NavLink to='/queuing/agents/'>
-                            <ion-icon name="people-outline"></ion-icon>
-                            Agents
-                        </NavLink>
-                    </li>
+                    {
+                        appMenuItems.menuItems.map( (menuItem, index) => 
+                            <li key={ index }>
+                                <NavLink to={appMenuItems.path +""+ menuItem.path}>
+                                    <ion-icon name={menuItem.icon}></ion-icon>
+                                    {menuItem.name}
+                                </NavLink>
+                            </li>      
+                        )
+                    }
                     <li>
                         <NavLink to='/sign-out/'>
                             <ion-icon name="log-out-outline"></ion-icon>
@@ -57,6 +56,17 @@ class Sidebar extends React.Component {
         )
     }
 }
-  
-export default Sidebar
+
+const mapStateToProps = state => {
+    const { settings } = state
+    return {
+        currentApp: settings.currentApp,
+  }
+}
+ 
+export default connect(mapStateToProps, 
+    { 
+        updateCurrentApp,
+    }
+)(Sidebar);
 

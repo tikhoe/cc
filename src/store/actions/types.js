@@ -88,3 +88,4 @@ export const FETCH_CUSTOMERS = 'FETCH_CUSTOMERS';
 
 // settings
 export const MODAL_UPDATE = 'MODAL_UPDATE';
+export const UPDATE_CURRENT_APP = 'UPDATE_CURRENT_APP';

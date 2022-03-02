@@ -1,13 +1,23 @@
 import React from 'react';
+import Dashboard from '../components/ds/Dashboard';
+import Default from '../components/ds/Default';
 
 // components
 
 class DS extends React.Component {
-    render(){
 
-        return (
-            <div>DS content will be here</div>
-        )   
+    components = {
+        'dashboard': Dashboard,
+        'default':  Default
+    }
+
+    render(){
+    const { page } = this.props;
+    const DynamicComponent = page != null 
+        ?   this.components[page]
+        :   Default 
+    return <DynamicComponent />
+            
     }
 }
 

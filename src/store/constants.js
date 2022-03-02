@@ -39,11 +39,11 @@ export const URLs = {
 export const navigation = [
     {
         app: 'ds',
-        path: '/ds',
+        path: '/ds/',
         menuItems: [
             {
                 name: 'Dashboard',
-                path: '/dashboard',
+                path: 'dashboard/',
                 icon: 'bar-chart-outline',
                 status: 1
             },
@@ -93,6 +93,67 @@ export const navigation = [
             {
                 name: 'Settings',
                 path: '/dashboard',
+                icon: 'settings-outline',
+                status: 1
+            }
+        ]
+
+    },
+    {
+        app: 'admin',
+        path: '/admin',
+        menuItems: [
+            {
+                name: 'Organizations',
+                path: '/organizations',
+                icon: 'bar-chart-outline',
+                status: 1
+            },
+            {
+                name: 'Endpoints',
+                path: '/endpoints',
+                icon: 'play-outline',
+                status: 1
+            },
+            {
+                name: 'Branches',
+                path: '/branches',
+                icon: 'business-outline',
+                status: 1
+            },
+            {
+                name: 'Audiences',
+                path: '/towns',
+                icon: 'earth-outline',
+                status: 1
+            }, {
+                name: 'Towns',
+                path: '/towns',
+                icon: 'paper-plane-outline',
+                status: 1
+            }
+            ,
+            {
+                name: 'Regions',
+                path: '/regions',
+                icon: 'paper-plane-outline',
+                status: 1
+            },
+            {
+                name: 'Countries',
+                path: '/countries',
+                icon: 'paper-plane-outline',
+                status: 1
+            },
+            {
+                name: 'Users',
+                path: '/users',
+                icon: 'people-outline',
+                status: 1
+            },
+            {
+                name: 'Settings',
+                path: '/settings',
                 icon: 'settings-outline',
                 status: 1
             }

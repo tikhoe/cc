@@ -21,7 +21,7 @@ class App extends React.Component {
               <Route path="/ds/:page/" element={<DS/>} />
               <Route path="/qm/" element={<QM/>} />
               <Route path="/cf/" component={CF} />
-              <Route path="/admin/" component={Admin} />
+              <Route path="/admin/" element={<Admin/>} />
           </Routes>
         </Layout>;
     </ Router>

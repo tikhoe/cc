@@ -167,20 +167,24 @@ export const Apps = [
         name:"Digital Signage",
         slug:"/ds/",
         icon:"",
+        shortName:'ds'
     },
     {
         name:"Queue Management",
         slug:"/qm/",
         icon:"",
+        shortName:'qm'
     },
     {
         name:"Customer Feedback",
         slug:"/cf/",
         icon:"",
+        shortName:'cf'
     },
     {
         name:"Admin",
         slug:"/admin/",
         icon:"",
+        shortName:'admin'
     }
 ]

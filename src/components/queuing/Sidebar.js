@@ -10,7 +10,7 @@ import MyServices from './sidebar/MyServices';
 class Sidebar extends React.Component {
     
     render(){
-        const { currentApp, updateCurrentApp } = this.props;
+        const { currentApp } = this.props;
 
         const appMenuItems = navigation.find( n => n.app === currentApp)
 
@@ -38,7 +38,7 @@ class Sidebar extends React.Component {
                             <li key={ index }>
                                 <NavLink to={appMenuItems.path +""+ menuItem.path}>
                                     <ion-icon name={menuItem.icon}></ion-icon>
-                                    {menuItem.name}
+                                    {currentApp}
                                 </NavLink>
                             </li>      
                         )

@@ -34,9 +34,9 @@ class Sidebar extends React.Component {
 
                 <ul className="list-unstyled components">
                     {
-                        appMenuItems.menuItems.map( menuItem => 
-                            <li>
-                                <NavLink to={menuItem.path}>
+                        appMenuItems.menuItems.map( (menuItem, index) => 
+                            <li key={ index }>
+                                <NavLink to={appMenuItems.path +""+ menuItem.path}>
                                     <ion-icon name={menuItem.icon}></ion-icon>
                                     {menuItem.name}
                                 </NavLink>

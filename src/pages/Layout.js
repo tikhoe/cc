@@ -8,7 +8,9 @@ import '../assets/css/Layout.css'
 
 class Layout extends React.Component {
     render(){
-
+        console.log('====================================');
+        console.log(this.props.children);
+        console.log('====================================');
         return (
             <div className="wrapper">
                 <div className="wrapper">

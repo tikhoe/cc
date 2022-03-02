@@ -39,11 +39,11 @@ export const URLs = {
 export const navigation = [
     {
         app: 'ds',
-        path: '/ds',
+        path: '/ds/',
         menuItems: [
             {
                 name: 'Dashboard',
-                path: '/dashboard',
+                path: 'dashboard/',
                 icon: 'bar-chart-outline',
                 status: 1
             },

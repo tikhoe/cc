@@ -16,6 +16,7 @@ export const fetchOrganizations =  () => dispatch => {
     })
     .catch( err => console.log(err) )
   }
+  
   export const fetchUsers =  () => dispatch => {
     fireStore.collection('/users')
     .get()

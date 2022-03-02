@@ -188,3 +188,12 @@ export const Apps = [
         shortName:'admin'
     }
 ]
+
+export const UsersPage = {
+    config:{
+        pageTitle: "Users",
+        subTitle: "Users that can manage and access the Averly Customer Experience Suite.",
+        form: {to: "/admin/user-update/"},
+        label:"Add a new user"
+    }
+};

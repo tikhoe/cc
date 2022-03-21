@@ -11,7 +11,7 @@ import DS from "./pages/DS";
 import QM from "./pages/QM";
 import CF from "./pages/CF";
 import Admin from "./pages/Admin";
-import Users from "./pages/Users";
+import User from "./pages/User";
 
 class App extends React.Component {
   // use the url to determine which page to show, instead of hard coding
@@ -23,7 +23,7 @@ class App extends React.Component {
               <Route path="/qm/" element={<QM/>} />
               <Route path="/cf/" element={CF} />
               <Route path="/admin/" element={<Admin/>} />
-              <Route path="/admin/users/" element={<Users/>} />
+              <Route path="/admin/users/" element={<User/>} />
           </Routes>
         </Layout>;
     </ Router>

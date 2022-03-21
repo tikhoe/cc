@@ -26,7 +26,7 @@ class Sidebar extends React.Component {
                         </div>
                         <div className="user-name">
                             <h4>
-                                Tikhoe Uirab
+                                Tikhoe Uirab {currentApp}
                             </h4>
                         </div>
                     </div>

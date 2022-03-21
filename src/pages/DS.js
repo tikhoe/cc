@@ -13,6 +13,7 @@ class DS extends React.Component {
 
     render(){
     const { page } = this.props;
+    console.log("ThisProps=="+JSON.stringify(this.props))
     const DynamicComponent = page != null 
         ?   this.components[page]
         :   Default 

@@ -9,7 +9,7 @@ const initialState = {
         content: null,
         modalType: 1
     },
-    currentApp:"admin"
+    currentApp:"ds"
     
 };
 
@@ -27,7 +27,7 @@ export default function reducerCase(state = initialState, action) {
     case UPDATE_CURRENT_APP:
       return {
         ...state,
-        currentApp: action.payload.currentApp
+        currentApp: action.payload
       }
     default:
       return state;

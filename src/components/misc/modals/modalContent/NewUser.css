@@ -1,0 +1,111 @@
+.modals .informationContainer {
+    margin-bottom: 10px;
+}
+.modals .alertContainer {
+    font-size: 14px;
+    color: rgb(255, 255, 255);
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: 20px 0
+}
+
+.modals .alertContainer span {
+    font-weight: 700;
+}
+
+
+.ticketActions {
+    margin-left: -7.5px;
+    margin-right: -7.5px;
+    height: auto;
+}
+
+.ticketActions .actionButtonContainer {
+    width: 25%;
+    padding: 0 7.5px;
+    float: left;
+    margin-top: 15px;
+    height: 70px;
+}
+
+.ticketActions .actionButton {
+    width: 100%;
+    height: 70px;
+    border-radius: 5px;
+    position: relative;
+    cursor: pointer;
+    
+}
+
+.ticketActions .actionButton:hover {
+    opacity: 0.8;
+}
+
+.ticketActions .actionButton  span {
+    width: 100%;
+    position: absolute;
+    bottom: 10px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.ticketActions .actionButton  div {
+    height: 46px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.scheme-purple-bg {
+    background-color: #626BE7;
+}
+
+.scheme-orange-bg {
+    background-color: #F39264!important;
+}
+
+.scheme-green-bg {
+    background-color: #1BB79F!important;
+}
+
+.scheme-blue-bg {
+    background-color: #0383FE!important;
+}
+
+.scheme-pinkred-bg {
+    background-color: #EB6477!important;
+}
+
+.scheme-gray-bg {
+    background-color: #797979!important;
+}
+
+.scheme-purple-bg svg {
+    fill: #F3F1FF;
+}
+
+.scheme-orange-bg svg {
+    fill: #FFECE2;
+}
+
+.scheme-green-bg svg {
+    fill: #E2FFFB;
+}
+
+.scheme-blue-bg svg {
+    fill: #E5F3FD;
+}
+
+.scheme-pinkred-bg svg {
+    fill: #FFE7EA;
+}
+
+.scheme-gray-bg svg {
+    fill: #EAEAEA;
+}

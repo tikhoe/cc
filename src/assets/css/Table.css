@@ -1,0 +1,32 @@
+table {
+    border-bottom: 1px solid #e2e8f0;
+    margin-top: 0.75em;
+    margin-bottom: 0.75em;
+    width: 100%;
+    border-spacing:0
+}
+
+table thead th, table thead td {
+    padding: 10px 10px;
+    border-bottom: 1px solid #111;
+    font-weight: bold;
+    text-align: left;
+}
+
+table tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+table tbody tr {
+    background-color: #ffffff;
+}
+
+table tbody tr:hover {
+    background-color: #ebf4ff;
+}
+
+table tbody td {
+    padding: 8px 10px;
+    line-height: 24px;
+    font-size: 14px;
+}

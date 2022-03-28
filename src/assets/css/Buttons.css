@@ -1,0 +1,17 @@
+button {
+    font-size: 16px;
+    color: #fff;
+    border-radius: 10px;
+    height: 40px;
+    line-height: 40px;
+    width: auto;
+    padding: 0 20px;
+    display: block;
+    cursor: pointer;
+    box-shadow: none;
+    border: none;
+}
+
+button:hover {
+    opacity: 0.8;
+}

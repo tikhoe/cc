@@ -1,0 +1,196 @@
+{
+    "apps": {},
+    "admin": {
+        "organizations": [],
+        "branches": [],
+        "endpoints": [],
+        "environmentControl": [],
+        "audiences": [],
+        "products": [],
+        "location": {
+            "towns": [],
+            "regions": [],
+            "Countries": []
+        },
+        "hardware": {
+            "hardwareTypes": [
+                {
+                    "name": "Queue Management Kiosk",
+                    "shortName": "qmk",
+                    "description": "qmk shell, no hardware"
+                },
+                {
+                    "name": "Customer Feedback Kiosk",
+                    "shortName": "cfk",
+                    "description": "cfk shell, no hardware"
+                },
+                {
+                    "name": "Iiyama 17inch Touchscreen",
+                    "shortName": "I17Touch"
+                },
+                {
+                    "name": "Giada Windows Endpoint",
+                    "shortName": "GiadaWindows"
+                },
+                {
+                    "name": "Giada Android Endpoint",
+                    "shortName": "GiadaAndroid"
+                },
+                {
+                    "name": "Lenovo Android Tablet Endpoint",
+                    "shortName": "LenovoAndroidT"
+                },
+                {
+                    "name": "Passport Scanner",
+                    "shortName": "passportScanner",
+                    "description": "ID and passport scanner"
+                },
+                {
+                    "name": "Barcode Scanner",
+                    "shortName": "barcodeScanner",
+                    "description": "Scanning barcodes from receipts and smartphones"
+                },
+                {
+                    "name": "Brother A4 printer",
+                    "shortName": "brotherA4Printer",
+                    "description": "A4 printing with extra tray"
+                },
+                {
+                    "name": "Thermal Printer",
+                    "shortName": "thermalPrinter",
+                    "description": "80mm thermal printer for receipts"
+                }
+            ],
+            "docs": [],
+            "printConfig": []
+        },
+        "iam": {
+            "apps": [
+                {
+                    "name": "ds",
+                    "pages": ["content", "schedule", "widgets", "reports", "settings"]
+                },
+                {
+                    "name": "qm",
+                    "pages": ["services", "supportDesks", "reports", "settings"]
+                },
+                {
+                    "name": "admin",
+                    "pages": ["organizations", "endpoints", "branches", "users", "settings"]
+                }
+            ],
+            "policies": [
+                {
+                    "name": "ds-content-read",
+                    "description": "Read access to content management",
+                    "permissions": ["1"]
+                },
+                {
+                    "name": "ds-content-read-write",
+                    "description": "Read/ write access to content management",
+                    "permissions": ["1", "2"]
+                },
+                {
+                    "name": "ds-content-update",
+                    "description": "Read/ write access to content management",
+                    "permissions": ["3"]
+                },
+                {
+                    "name": "ds-content-all",
+                    "description": "Read/ write access to content management",
+                    "permissions": ["1", "2", "3", "4"]
+                },
+                {
+                    "name": "ds-schedule-read",
+                    "description": "Read access to schedule management",
+                    "permissions": ["1"]
+                },
+                {
+                    "name": "ds-schedule-read-write",
+                    "description": "Read/ write access to schedule management",
+                    "permissions": ["1", "2"]
+                },
+                {
+                    "name": "ds-schedule-update",
+                    "description": "Update access to schedule management",
+                    "permissions": ["3"]
+                },
+                {
+                    "name": "ds-schedule-all",
+                    "description": "All access to schedule management",
+                    "permissions": ["1", "2", "3", "4"]
+                }
+            ],
+            "permissions": [
+                {
+                    "app": "ds",
+                    "resource": "content",
+                    "actions": ["create"]
+                },
+                {
+                    "app": "ds",
+                    "resource": "content",
+                    "actions": ["read"]
+                },
+                {
+                    "app": "ds",
+                    "resource": "content",
+                    "actions": ["update"]
+                },
+                {
+                    "app": "ds",
+                    "resource": "content",
+                    "actions": ["delete"]
+                },
+                {
+                    "app": "ds",
+                    "resource": "schedule",
+                    "actions": ["create"]
+                },
+                {
+                    "app": "ds",
+                    "resource": "schedule",
+                    "actions": ["read"]
+                },
+                {
+                    "app": "ds",
+                    "resource": "schedule",
+                    "actions": ["update"]
+                },
+                {
+                    "app": "ds",
+                    "resource": "schedule",
+                    "actions": ["delete"]
+                }
+            ],
+            "users": [],
+            "groups": [
+                {
+                    "name": "Super Admin",
+                    "shortName": "superAdmin",
+                    "description": "Super Admin group"
+                },
+                {
+                    "name": "Admin",
+                    "shortName": "admin",
+                    "description": "Admin group"
+                },
+                {
+                    "name": "Organization Admin",
+                    "shortName": "orgAdmin",
+                    "description": "Organization admin group"
+                },
+                {
+                    "name": "User",
+                    "shortName": "user",
+                    "description": "User group"
+                },
+                {
+                    "name": "Agent",
+                    "shortName": "agent",
+                    "description": "Agent group"
+                }
+            ]
+        }
+    }
+}

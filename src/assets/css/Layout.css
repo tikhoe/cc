@@ -1,5 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
 body{
     font-family: 'Lato', sans-serif;
     background: #F0F0F6;
@@ -141,6 +142,11 @@ a.submenu ion-icon {
     font-size: 15px;
     color: #8B8C94;
     letter-spacing: .5px;
+}
+
+.sidebar-footer a:hover {
+    cursor: pointer!important;
+    text-decoration: underline!important;
 }
 
 
@@ -1382,7 +1388,7 @@ select {
     width: 400px;
 }
 .col-two {
-    width: 443px;
+    width: 600px;
     margin-top: 20px;
 }
 .col-three {

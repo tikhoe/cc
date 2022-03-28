@@ -1,10 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import throttle from 'lodash/throttle';
+
+import { saveState } from './store/LocalStorage';
 
 import store from './store/';
 
 import App from './App';
+
+store.subscribe(throttle(() => {
+  // resets for reload
+  const settings = store.getState().settings
+  // saveState
+  saveState({ settings });
+}, 1000));
 
 ReactDOM.render(
   <React.StrictMode>

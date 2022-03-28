@@ -12,6 +12,7 @@ export const modalUpdate = (payload) => dispatch => {
 };
 
 export const updateCurrentApp = (payload) => dispatch => {
+  console.log(payload);
   dispatch({
     type: UPDATE_CURRENT_APP,
     payload

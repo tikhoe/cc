@@ -1,5 +1,3 @@
-import { useLocation } from 'react-router-dom';
-
 export const PubSubKeys = {
     createTicket: {
         exchange: "tickets",
@@ -32,8 +30,8 @@ export const TicketStatuses = {
 };
 
 export const URLs = {
-    pubsub: 'http://192.168.8.158:4000/localrmq/',
-    api: 'http://192.168.8.158:4000'
+    pubsub: '/localrmq/',
+    api: 'https://tikhoes-macbook-pro.local:4000'
 }
 
 export const navigation = [
@@ -49,25 +47,25 @@ export const navigation = [
             },
             {
                 name: 'Media Storage',
-                path: '/dashboard',
+                path: 'storage/',
                 icon: 'cloud-upload-outline',
                 status: 1
             },
             {
                 name: 'Scheduled content',
-                path: '/dashboard',
+                path: 'scheduled/',
                 icon: 'videocam-outline',
                 status: 1
             },
             {
                 name: 'Widgets',
-                path: '/dashboard',
+                path: 'widgets/',
                 icon: 'apps-outline',
                 status: 1
             },
             {
                 name: 'Settings',
-                path: '/dashboard',
+                path: 'settings/',
                 icon: 'settings-outline',
                 status: 1
             }
@@ -76,23 +74,29 @@ export const navigation = [
     },
     {
         app: 'qm',
-        path: '/qm',
+        path: '/qm/',
         menuItems: [
             {
                 name: 'Dashboard',
-                path: '/dashboard',
+                path: 'dashboard/',
                 icon: 'bar-chart-outline',
                 status: 1
             },
             {
                 name: 'Services',
-                path: '/services',
+                path: 'services/',
+                icon: 'apps-outline',
+                status: 1
+            },
+            {
+                name: 'Support Desks',
+                path: 'support-desks/',
                 icon: 'apps-outline',
                 status: 1
             },
             {
                 name: 'Settings',
-                path: '/dashboard',
+                path: 'settings/',
                 icon: 'settings-outline',
                 status: 1
             }
@@ -101,59 +105,35 @@ export const navigation = [
     },
     {
         app: 'admin',
-        path: '/admin',
+        path: '/admin/',
         menuItems: [
             {
                 name: 'Organizations',
-                path: '/organizations',
+                path: 'organizations/',
                 icon: 'bar-chart-outline',
                 status: 1
             },
             {
                 name: 'Endpoints',
-                path: '/endpoints',
+                path: 'endpoints/',
                 icon: 'play-outline',
                 status: 1
             },
             {
                 name: 'Branches',
-                path: '/branches',
+                path: 'branches/',
                 icon: 'business-outline',
                 status: 1
             },
             {
-                name: 'Audiences',
-                path: '/towns',
-                icon: 'earth-outline',
-                status: 1
-            }, {
-                name: 'Towns',
-                path: '/towns',
-                icon: 'paper-plane-outline',
-                status: 1
-            }
-            ,
-            {
-                name: 'Regions',
-                path: '/regions',
-                icon: 'paper-plane-outline',
-                status: 1
-            },
-            {
-                name: 'Countries',
-                path: '/countries',
-                icon: 'paper-plane-outline',
-                status: 1
-            },
-            {
                 name: 'Users',
-                path: '/users',
+                path: 'users/',
                 icon: 'people-outline',
                 status: 1
             },
             {
                 name: 'Settings',
-                path: '/settings',
+                path: 'settings/',
                 icon: 'settings-outline',
                 status: 1
             }
@@ -162,25 +142,39 @@ export const navigation = [
     }
 ]
 
-export const Apps = [
+export const apps = [
     {
         name:"Digital Signage",
-        slug:"/ds/",
-        icon:"",
+        shortName: "ds",
+        path:"/ds/",
     },
     {
         name:"Queue Management",
-        slug:"/qm/",
-        icon:"",
+        shortName: "qm",
+        path:"/qm/",
     },
-    {
-        name:"Customer Feedback",
-        slug:"/cf/",
-        icon:"",
-    },
+    // {
+    //     name:"Customer Feedback",
+    //     shortName: "cf",
+    //     path:"/cf/",
+    // },
     {
         name:"Admin",
-        slug:"/admin/",
-        icon:"",
+        shortName: "admin",
+        path:"/admin/",
     }
 ]
+
+
+// create new user
+export const userDefault = {
+    organizationId: '',
+    branchId: '',
+    name: '',
+    lastname: '',
+    email: '',
+    password: '',
+    agentStatus: 0,
+    services: [],
+    created: '',
+}

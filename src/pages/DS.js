@@ -1,6 +1,6 @@
 import React from 'react';
-import Dashboard from '../components/ds/Dashboard';
-import Default from '../components/ds/Default';
+import Dashboard from '../components/apps/ds/Dashboard';
+import Default from '../components/apps/ds/Default';
 
 // components
 

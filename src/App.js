@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from 'react-redux'
 import {
   BrowserRouter as Router,
   Switch,
@@ -13,8 +14,19 @@ import CF from "./pages/CF";
 import Admin from "./pages/Admin";
 import Modal from "./components/misc/modals/Modal1";
 
+import { fetchUsers } from "./store/actions/usersActions";
+import { fetchBranches } from "./store/actions/branchesActions";
+import { fetchOrganizations } from "./store/actions/organizationsActions";
+
 class App extends React.Component {
   // use the url to determine which page to show, instead of hard coding
+  componentDidMount(){
+    const { fetchUsers, fetchBranches, fetchOrganizations } = this.props
+    fetchUsers()
+    fetchBranches()
+    fetchOrganizations()
+  }
+
   render() {
     return (
       <Router>
@@ -36,4 +48,16 @@ class App extends React.Component {
   }
 }
 
-export default App
+
+const mapStateToProps = state => {
+  const { users } = state;
+  return {
+      user: users.user
+  }
+}
+
+export default connect(mapStateToProps, {
+  fetchUsers,
+  fetchBranches,
+  fetchOrganizations,
+})(App);

@@ -177,4 +177,25 @@ export const userDefault = {
     agentStatus: 0,
     services: [],
     created: '',
+    updateStatus: 0
+}
+
+// create new organization
+export const organizationDefault = {
+    name: '',
+    shortName: '',
+    created: '',
+    updateStatus: 0
+}
+
+// create new branch
+export const branchDefault = {
+    name: '',
+    description: '',
+    organizationId: '',
+    townId: '',
+    regionId: '',
+    countryId: '',
+    created: '',
+    updateStatus: 0
 }

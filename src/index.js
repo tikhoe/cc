@@ -12,8 +12,11 @@ import App from './App';
 store.subscribe(throttle(() => {
   // resets for reload
   const settings = store.getState().settings
+  const branches = store.getState().branches
+  const organizations = store.getState().organizations
+  const users = store.getState().users
   // saveState
-  saveState({ settings });
+  saveState({ settings, branches, organizations, users });
 }, 1000));
 
 ReactDOM.render(

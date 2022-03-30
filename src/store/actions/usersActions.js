@@ -1,13 +1,13 @@
 import axios from 'axios'
-
 import { 
   FETCH_USERS,
   RESET_USER,
-  UPDATE_USER
+  UPDATE_USER,
+  CREATE_USER,
 } from './types';
 
 import { fireStore } from '../../firebase';
-import { URLs, userDefault } from '../constants'
+import { URLs } from '../constants'
 
 const { api, pubsub } = URLs
 
@@ -40,15 +40,14 @@ export const addNewUser =  (payload) => dispatch => {
 
 export const resetUser =  () => dispatch => {
   dispatch({
-    type: 'RESET_USER',
-    payload: userDefault
+    type: RESET_USER
   })
 }
 
 export const updateUser =  (payload) => dispatch => {
   console.log(payload);
   dispatch({
-    type: 'UPDATE_USER',
+    type: UPDATE_USER,
     payload
   })
 }

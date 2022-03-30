@@ -14,6 +14,7 @@ class Sidebar extends React.Component {
 
         const appMenuItems = navigation.find( n => n.app === currentApp)
         console.log(currentApp);
+
         return (
             <nav id="sidebar">
                 <div className="sidebar-header">

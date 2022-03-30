@@ -3,24 +3,34 @@ import { connect } from 'react-redux'
 
 import {
     updateUser,
-    addNewUser
+    addNewUser,
+    resetUser
 } from "../../../../store/actions/usersActions";
+
+import {
+    modalUpdate
+} from "../../../../store/actions/settingsActions";
 
 import './NewUser.css'
 
 class NewUser extends React.Component {
+    closeForm(){
+        console.log('closeForm');
+        const { resetUser, modalUpdate } = this.props
+        resetUser()
+        modalUpdate({ visible: 0, content: null, modalType: 0 })
+    }
 
     render(){
 
         const { user } = this.props
         const { updateUser } = this.props
-        console.log(user);
 
         return (
             <>  
                <h5>Add New User</h5>
 
-               <div className="select-options">
+                <div className="select-options">
                     <label>Select Organization</label>
                     <div className="selectStyling">
                         <select value={user.organizationId} onChange={ (e) => updateUser( { organizationId: e.target.value }) }>
@@ -110,7 +120,15 @@ class NewUser extends React.Component {
                     )
                     :   null
                 }
-                <button className='purple-bg' onClick={ () => this.props.addNewUser(user) }>Add User</button>
+                {
+                    (
+                        (user.organizationId !== '' && user.name !== '' && user.lastname !== '' && user.email !== '' && user.password !== '' && Number(user.agentStatus) === 1 && user.branchId !== '' && user.services !== '') ||
+                        (user.organizationId !== '' && user.name !== '' && user.lastname !== '' && user.email !== '' && user.password !== '' && Number(user.agentStatus) === 2)
+                    )
+                    ?   <button className='purple-bg pullLeft' onClick={ () => this.props.addNewUser(user) }>Add User</button>
+                    :   <button className='gray-bg pullLeft' style={{ cursor: 'not-allowed' }}>Add User</button>
+                }
+                <button className='gray-bg pullLeft' style={{ marginLeft: 10 }} onClick={ () => this.closeForm(user) }>Cancel</button>
             </>
         )
     }
@@ -126,4 +144,6 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
     updateUser,
     addNewUser,
+    resetUser,
+    modalUpdate
 })(NewUser);

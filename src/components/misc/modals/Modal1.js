@@ -2,6 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux'
 
 import NewUser from './modalContent/NewUser'; 
+import NewOrganization from './modalContent/NewOrganization'; 
+import DeleteOrganization from './modalContent/DeleteOrganization'; 
+import NewBranch from './modalContent/NewBranch'; 
 
 import './Modals.css';
 
@@ -10,12 +13,13 @@ import {
     modalUpdate
 } from "../../../store/actions/settingsActions";
 
-
-
 class Modal1 extends React.Component {
 
     components = {
-        NewUser
+        NewUser,
+        NewOrganization,
+        DeleteOrganization,
+        NewBranch
     }
     
     render(){

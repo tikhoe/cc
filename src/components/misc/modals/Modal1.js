@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import NewUser from './modalContent/NewUser'; 
 import NewOrganization from './modalContent/NewOrganization'; 
 import DeleteOrganization from './modalContent/DeleteOrganization'; 
+import DeleteUser from './modalContent/DeleteUser'; 
 import NewBranch from './modalContent/NewBranch'; 
 
 import './Modals.css';
@@ -17,9 +18,10 @@ class Modal1 extends React.Component {
 
     components = {
         NewUser,
+        NewBranch,
         NewOrganization,
+        DeleteUser,
         DeleteOrganization,
-        NewBranch
     }
     
     render(){

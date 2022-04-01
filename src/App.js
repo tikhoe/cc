@@ -14,17 +14,19 @@ import CF from "./pages/CF";
 import Admin from "./pages/Admin";
 import Modal from "./components/misc/modals/Modal1";
 
-import { fetchUsers } from "./store/actions/usersActions";
+import { listenOrganizations } from "./store/actions/organizationsActions";
+import { listenServices } from "./store/actions/servicesActions";
+import { listenUsers } from "./store/actions/usersActions";
 import { fetchBranches } from "./store/actions/branchesActions";
-import { fetchOrganizations } from "./store/actions/organizationsActions";
 
 class App extends React.Component {
   // use the url to determine which page to show, instead of hard coding
   componentDidMount(){
-    const { fetchUsers, fetchBranches, fetchOrganizations } = this.props
-    fetchUsers()
+    const { listenUsers, fetchBranches, listenOrganizations, listenServices } = this.props
+    listenOrganizations()
+    listenServices()
+    listenUsers()
     fetchBranches()
-    fetchOrganizations()
   }
 
   render() {
@@ -57,7 +59,8 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps, {
-  fetchUsers,
+  listenOrganizations,
+  listenServices,
+  listenUsers,
   fetchBranches,
-  fetchOrganizations,
 })(App);

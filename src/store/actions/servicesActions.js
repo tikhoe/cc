@@ -1,62 +1,24 @@
 import axios from 'axios'
-import socketIOClient from "socket.io-client";
+
 import { 
-  LISTEN_SERVICES_START,
-  LISTEN_SERVICES_CREATE,
-  LISTEN_SERVICES_UPDATE,
-  LISTEN_SERVICES_DELETE,
-  FETCH_SERVICES,
-  STORE_SIGNIN_COUNTERID
+  LISTEN_SERVICES,
 } from './types';
 import { URLs } from '../constants'
+import { fireStore } from '../../firebase';
 
 const { api, pubsub } = URLs
-const socket = socketIOClient(api);
 
 
-export const listenServices = () => dispatch => {
-  let type = LISTEN_SERVICES_START, payload = {}
-  dispatch({ type, payload })
-
-  socket.on( "services-broadcast-updated", res => {
-    if(res.new_val != null){
-      if(res.old_val!=null){ 
-        type = LISTEN_SERVICES_UPDATE
-        payload = res.new_val
-      } 
-      else { 
-        type = LISTEN_SERVICES_CREATE
-        payload = res.new_val
-      }
-    } else {
-      if(res.old_val!=null){ 
-        type = LISTEN_SERVICES_DELETE 
-        payload = res.old_val
-      }
-    }
-
+export const listenServices =  () => dispatch => {
+  console.log("listenServices");
+  fireStore
+  .collection('/apps/qm/services')
+  .onSnapshot((snapshot) => {
+    let data = snapshot.docs.map( doc => { return { ...doc.data(), id: doc.id } })
+    data.sort((a, b) => ( a.name > b.name ) ? 1 : (( b.name > a.name ) ? -1 : 0 ))
     dispatch({
-      type,
-      payload
+      type: LISTEN_SERVICES,
+      payload: data
     })
-
   })
 }
-
-export const fetchServices = () => dispatch => {
-  axios.get( api + '/services/' )
-  .then(res =>
-    dispatch({
-      type: FETCH_SERVICES,
-      payload: res.data
-    })
-  );
-};
-
-export const storeCounterId = (payload) => dispatch => {
-  dispatch({
-    type: STORE_SIGNIN_COUNTERID,
-    payload
-  })
-
-};

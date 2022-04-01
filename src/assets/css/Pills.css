@@ -1,0 +1,7 @@
+.pill {
+    display: inline!important;
+    padding: 2px 5px;
+    font-size: 13px;
+    border-radius: 4px;
+    margin-right: 3px;
+}

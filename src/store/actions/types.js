@@ -4,8 +4,11 @@ export const CREATE_USER = 'CREATE_USER';
 export const FETCH_USERS = 'FETCH_USERS';
 export const LISTEN_USERS = 'LISTEN_USERS';
 export const UPDATE_USER = 'UPDATE_USER';
+export const UPDATE_USER_KEY_VALUE = 'UPDATE_USER_KEY_VALUE';
+export const UPDATE_USER_GET_OBJECT = 'UPDATE_USER_GET_OBJECT';
 export const DELETE_USER = 'DELETE_USER';
 export const RESET_USER = 'RESET_USER';
+
 
 // organizations
 export const CREATE_ORGANIZATION = 'CREATE_ORGANIZATION';
@@ -23,6 +26,9 @@ export const LISTEN_BRANCHES = 'LISTEN_BRANCHES';
 export const UPDATE_BRANCH = 'UPDATE_BRANCH';
 export const DELETE_BRANCH = 'DELETE_BRANCH';
 export const RESET_BRANCH = 'RESET_BRANCH';
+
+// services
+export const LISTEN_SERVICES = 'LISTEN_SERVICES';
 
 // settings
 export const MODAL_UPDATE = 'MODAL_UPDATE';

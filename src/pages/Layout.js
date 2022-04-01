@@ -8,6 +8,7 @@ import '../assets/css/Layout.css'
 import '../assets/css/Table.css'
 import '../assets/css/Buttons.css'
 import '../assets/css/Colors.css'
+import '../assets/css/Pills.css'
 
 class Layout extends React.Component {
     render(){

@@ -34,7 +34,7 @@ class DeleteOrganization extends React.Component {
                         <label>Name</label>
                         <span>{ organization.name }</span>
                     </div>
-                    <div className="informationRow">
+                    <div className="informationRow noselect">
                         <label>Short Name</label>
                         <span>{ organization.shortName }</span>
                     </div>

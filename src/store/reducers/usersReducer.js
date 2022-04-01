@@ -4,7 +4,9 @@ import {
   RESET_USER,
   UPDATE_USER,
   CREATE_USER,
-  DELETE_USER
+  DELETE_USER,
+  UPDATE_USER_KEY_VALUE,
+  UPDATE_USER_GET_OBJECT,
 } from '../actions/types';
 import { userDefault } from '../constants'
 
@@ -15,15 +17,20 @@ const initialState = {
 
 export default function reducerCase(state = initialState, action) {
   switch (action.type) {
-    case FETCH_USERS:
+    case LISTEN_USERS:
       return {
         ...state,
         users: action.payload
       };
-    case UPDATE_USER:
+    case UPDATE_USER_KEY_VALUE:
       return {
         ...state,
         user: { ...state.user, ...action.payload }
+      };
+    case UPDATE_USER_GET_OBJECT:
+      return {
+        ...state,
+        user: { ...state.users.find(user => user.id === action.payload ), updateStatus: 1 }
       };
     case RESET_USER:
       return {

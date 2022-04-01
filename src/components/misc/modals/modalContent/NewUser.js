@@ -1,9 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux'
+import Select from 'react-select'
+import Animated from 'react-select/animated';
+import Toggle from 'react-toggle'
+import "react-toggle/style.css"
 
 import {
-    updateUser,
+    updateUserKeyValue,
     addNewUser,
+    updateUser,
     resetUser
 } from "../../../../store/actions/usersActions";
 
@@ -14,17 +19,11 @@ import {
 import './NewUser.css'
 
 class NewUser extends React.Component {
-    closeForm(){
-        console.log('closeForm');
-        const { resetUser, modalUpdate } = this.props
-        resetUser()
-        modalUpdate({ visible: 0, content: null, modalType: 0 })
-    }
 
     render(){
 
-        const { user } = this.props
-        const { updateUser } = this.props
+        const { user, organizations, branches, services } = this.props
+        const { addNewUser, updateUser, updateUserKeyValue, resetUser, modalUpdate } = this.props
 
         return (
             <>  
@@ -33,12 +32,11 @@ class NewUser extends React.Component {
                 <div className="select-options">
                     <label>Select Organization</label>
                     <div className="selectStyling">
-                        <select value={user.organizationId} onChange={ (e) => updateUser( { organizationId: e.target.value }) }>
+                        <select value={user.organizationId} onChange={ (e) => updateUserKeyValue( { organizationId: e.target.value }) }>
                             <option value="">Select an Organization</option>
-                            <option>Option number 1</option>
-                            <option>Option number 2</option>
-                            <option>Option number 3</option>
-                            <option>Option number 4</option>
+                            {
+                                organizations.map( (organization, index) => <option key={index} value={organization.id}>{organization.name}</option> )
+                            }
                         </select>
                     </div>
                 </div>
@@ -49,21 +47,21 @@ class NewUser extends React.Component {
                         <>
                             <div className="input-options">
                                 <label>Enter Name</label>
-                                <input type="text" placeholder="Name" value={user.name} onChange={ (e) => updateUser( { name: e.target.value }) } />
+                                <input type="text" placeholder="Name" value={user.name} onChange={ (e) => updateUserKeyValue( { name: e.target.value }) } />
                             </div>
                             <div className="input-options">
                                 <label>Enter Lastname</label>
-                                <input type="text" placeholder="Lastname"  value={user.lastname} onChange={ (e) => updateUser( { lastname: e.target.value }) } />
+                                <input type="text" placeholder="Lastname"  value={user.lastname} onChange={ (e) => updateUserKeyValue( { lastname: e.target.value }) } />
                             </div>
 
                             <div className="input-options">
                                 <label>Email address</label>
-                                <input type="email" placeholder="Email"  value={user.email} onChange={ (e) => updateUser( { email: e.target.value }) } />
+                                <input type="email" placeholder="Email"  value={user.email} onChange={ (e) => updateUserKeyValue( { email: e.target.value }) } />
                             </div>
 
                             <div className="input-options">
                                 <label>Enter Password</label>
-                                <input type="password" placeholder="Password" autoComplete="new-password"  value={user.password} onChange={ (e) => updateUser( { password: e.target.value }) } />
+                                <input type="password" placeholder="Password" autoComplete="new-password"  value={user.password} onChange={ (e) => updateUserKeyValue( { password: e.target.value }) } />
                             </div>
                         </>
                     )
@@ -75,15 +73,13 @@ class NewUser extends React.Component {
                 {
                     user.organizationId !== '' && user.name !== '' && user.lastname !== '' && user.email !== '' && user.password !== ''
                     ?   (
-                        <div className="select-options">
-                            <label>Is this user a support agent?</label>
-                            <div className="selectStyling">
-                                <select value={user.agentStatus} onChange={ (e) => updateUser( { agentStatus: e.target.value }) }>
-                                    <option value={-1}>Select the agent status of this user</option>
-                                    <option value={1}>Yes, user is a support agent</option>
-                                    <option value={2}>No</option>
-                                </select>
-                            </div>
+                        <div style={{ padding:"15px 0", display: "flex" }}>
+                            <Toggle
+                                id='agentStatus'
+                                defaultChecked={ Number(user.agentStatus) === 1 ? true : false }
+                                onChange={ (e) => updateUserKeyValue( { agentStatus: e.target.checked ? 1 : 0 }) }
+                            />
+                            <label htmlFor='agentStatus' style={{ padding: "2px 0 0 10px" }}>{ Number(user.agentStatus) ? "Yes, user is a support agent" : "No, user is not a support agent"}</label>
                         </div>
                     )
                     :   null
@@ -96,25 +92,24 @@ class NewUser extends React.Component {
                             <div className="select-options">
                                 <label>Select Branch</label>
                                 <div className="selectStyling">
-                                    <select value={user.branchId} onChange={ (e) => updateUser( { branchId: e.target.value }) }>
+                                    <select value={user.branchId} onChange={ (e) => updateUserKeyValue( { branchId: e.target.value }) }>
                                         <option value="">Select a Branch</option>
-                                        <option>Option number 1</option>
-                                        <option>Option number 2</option>
-                                        <option>Option number 3</option>
-                                        <option>Option number 4</option>
+                                        {
+                                            branches.filter(branch => branch.organizationId === user.organizationId).map( (branch, index) => <option key={index} value={branch.id}>{branch.name}</option> )
+                                        }
                                     </select>
                                 </div>
                             </div>
 
                             <div className="select-options">
                                 <label>Services</label>
-                                <div className="selectStyling">
-                                    <select multiple value={user.services} onChange={ (e) => updateUser( { services: e.target.value }) }>
-                                        <option value="0">Select services</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                    </select>
-                                </div>
+                                <Select
+                                    defaultValue={ services.filter(data => user.services.includes(data.id) ).map(data => { return  {value:data.id, label:data.name} } ) }
+                                    isMulti
+                                    components={ Animated() }
+                                    options={ services.filter(data => data.organizationId === user.organizationId).map(data => { return  {value:data.id, label:data.name} } ) }
+                                    onChange={ (e) => updateUserKeyValue({ services: e.map(data => { return data.value} ) }) }
+                                />
                             </div>
                         </>
                     )
@@ -122,28 +117,34 @@ class NewUser extends React.Component {
                 }
                 {
                     (
-                        (user.organizationId !== '' && user.name !== '' && user.lastname !== '' && user.email !== '' && user.password !== '' && Number(user.agentStatus) === 1 && user.branchId !== '' && user.services !== '') ||
-                        (user.organizationId !== '' && user.name !== '' && user.lastname !== '' && user.email !== '' && user.password !== '' && Number(user.agentStatus) === 2)
+                        (user.organizationId !== '' && user.name !== '' && user.lastname !== '' && user.email !== '' && user.password !== '' && Number(user.agentStatus) === 1 && user.branchId !== '' && user.services.length) ||
+                        (user.organizationId !== '' && user.name !== '' && user.lastname !== '' && user.email !== '' && user.password !== '' && Number(user.agentStatus) === 0)
                     )
-                    ?   <button className='purple-bg pullLeft' onClick={ () => this.props.addNewUser(user) }>Add User</button>
+                    ?   user.updateStatus
+                        ?   <button className='purple-bg pullLeft' onClick={ () => { updateUser(user); modalUpdate({ visible: 0, content: null, modalType: 0 }) } }>Update User</button>
+                        :   <button className='purple-bg pullLeft' onClick={ () => { addNewUser(user); modalUpdate({ visible: 0, content: null, modalType: 0 }) } }>Add User</button>
                     :   <button className='gray-bg pullLeft' style={{ cursor: 'not-allowed' }}>Add User</button>
                 }
-                <button className='gray-bg pullLeft' style={{ marginLeft: 10 }} onClick={ () => this.closeForm(user) }>Cancel</button>
+                <button className='gray-bg pullLeft' style={{ marginLeft: 10 }} onClick={ () => { resetUser(); modalUpdate({ visible: 0, content: null, modalType: 0 }) } }>Cancel</button>
             </>
         )
     }
 }
 
 const mapStateToProps = state => {
-    const { users } = state;
+    const { users, organizations, branches, services } = state;
     return {
-        user: users.user
+        user: users.user,
+        organizations: organizations.organizations,
+        branches: branches.branches,
+        services: services.services,
     }
 }
   
 export default connect(mapStateToProps, {
-    updateUser,
+    updateUserKeyValue,
     addNewUser,
+    updateUser,
     resetUser,
     modalUpdate
 })(NewUser);

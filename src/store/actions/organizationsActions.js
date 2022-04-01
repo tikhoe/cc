@@ -12,9 +12,22 @@ import {
 
 import { fireStore } from '../../firebase';
 import { URLs } from '../constants'
-import { sort } from '../helpers'
+
 
 const { api, pubsub } = URLs
+
+export const listenOrganizations =  () => dispatch => {
+  fireStore
+  .collection('/organizations')
+  .onSnapshot((snapshot) => {
+    let organizations = snapshot.docs.map( doc => { return { ...doc.data(), id: doc.id } })
+    organizations.sort((a, b) => ( a.name > b.name ) ? 1 : (( b.name > a.name ) ? -1 : 0 ))
+    dispatch({
+      type: LISTEN_ORGANIZATIONS,
+      payload: organizations
+    })
+  })
+}
 
 export const fetchOrganizations =  () => dispatch => {
   fireStore
@@ -32,27 +45,15 @@ export const fetchOrganizations =  () => dispatch => {
     .catch( err => console.log(err) )  
 }
 
-export const listenOrganizations =  () => dispatch => {
-  fireStore
-  .collection('/organizations')
-  .onSnapshot((snapshot) => {
-    let organizations = snapshot.docs.map( doc => { return { ...doc.data(), id: doc.id } })
-    organizations.sort((a, b) => ( a.name > b.name ) ? 1 : (( b.name > a.name ) ? -1 : 0 ))
-    dispatch({
-      type: LISTEN_ORGANIZATIONS,
-      payload: organizations
-    })
-  })
-}
-
 export const addNewOrganization =  (payload) => dispatch => {
-  var finalPayload = { ...payload }
-  finalPayload.created = dayjs().unix()
-  delete finalPayload.updateStatus
+
+  const data = { ...payload }
+  data.created = dayjs().unix()
+  delete data.updateStatus
 
   fireStore
     .collection("/organizations")
-    .add(finalPayload)
+    .add(data)
     .then(docRef => {
       console.log("Document written with ID: ", docRef.id);
       dispatch( resetOrganization() )

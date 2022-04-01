@@ -15,8 +15,10 @@ store.subscribe(throttle(() => {
   const branches = store.getState().branches
   const organizations = store.getState().organizations
   const users = store.getState().users
+  const services = store.getState().services
+  
   // saveState
-  saveState({ settings, branches, organizations, users });
+  saveState({ settings, branches, organizations, users, services });
 }, 1000));
 
 ReactDOM.render(

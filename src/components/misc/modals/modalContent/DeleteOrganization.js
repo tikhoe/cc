@@ -18,6 +18,12 @@ class DeleteOrganization extends React.Component {
             shortName: ''
         }
     }
+    
+    componentWillUnmount(){
+        const { resetOrganization } = this.props
+        resetOrganization()
+    }
+
     render(){
 
         const { organization } = this.props

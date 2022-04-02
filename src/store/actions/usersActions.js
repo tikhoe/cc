@@ -11,9 +11,25 @@ import {
 } from './types';
 
 import { fireStore } from '../../firebase';
-import { URLs } from '../constants'
+import { URLs, isDev } from '../constants'
+const { api, devApi, pubsub } = URLs
+axios.defaults.baseURL = !isDev ? api : devApi
 
-const { api, pubsub } = URLs
+
+export const listenUsers =  () => dispatch => {
+  console.log('listenUsers');
+  fireStore
+  .collection('/admin/iam/users')
+  .onSnapshot((snapshot) => {
+    let users = snapshot.docs.map( doc => { return { ...doc.data(), id: doc.id } })
+    console.log(users);
+    users.sort((a, b) => ( a.name > b.name ) ? 1 : (( b.name > a.name ) ? -1 : 0 ))
+    dispatch({
+      type: LISTEN_USERS,
+      payload: users
+    })
+  })
+}
 
 export const fetchUsers =  () => dispatch => {
   fireStore.collection('/admin/iam/users')
@@ -33,17 +49,45 @@ export const addNewUser =  (payload) => dispatch => {
   const data = { ...payload }
   data.created = dayjs().unix()
   delete data.updateStatus
+  delete data.passwordStatus
 
-  fireStore
-    .collection("/admin/iam/users")
-    .add(data)
-    .then(docRef => {
-      console.log("Document written with ID: ", docRef.id);
+  axios
+    .post('/users/', data)
+    .then( () => {
       dispatch( resetUser() )
     })
-    .catch(error => {
-      console.error("Error adding document: ", error);
-    });
+    .catch( err => {
+      console.log(err);
+    })
+}
+
+export const updateUser =  (payload) => dispatch => {
+  var data = { ...payload }
+  delete data.updateStatus
+  delete data.passwordStatus
+
+  axios
+    .post('/users/update', data)
+    .then( () => {
+      dispatch( resetUser() )
+    })
+    .catch( err => {
+      console.log(err);
+    })
+}
+
+export const deleteUser =  (user) => dispatch => {
+  const { id, mysqlId } = user
+  const data = { id, mysqlId }
+
+  axios
+    .delete('/users/', { data })
+    .then( () => {
+      dispatch( resetUser() )
+    })
+    .catch( err => {
+      console.log(err);
+    })
 }
 
 export const resetUser =  () => dispatch => {
@@ -52,48 +96,6 @@ export const resetUser =  () => dispatch => {
   })
 }
 
-export const listenUsers =  () => dispatch => {
-  console.log('listenUsers');
-  fireStore
-  .collection('/admin/iam/users')
-  .onSnapshot((snapshot) => {
-    let users = snapshot.docs.map( doc => { return { ...doc.data(), id: doc.id } })
-    console.log(users);
-    users.sort((a, b) => ( a.name > b.name ) ? 1 : (( b.name > a.name ) ? -1 : 0 ))
-    dispatch({
-      type: LISTEN_USERS,
-      payload: users
-    })
-  })
-}
-export const updateUser =  (payload) => dispatch => {
-  var finalPayload = { ...payload }
-  delete finalPayload.updateStatus
-
-  fireStore
-    .collection("/admin/iam/users")
-    .doc(payload.id)
-    .update(finalPayload)
-    .then(docRef => {
-      console.log("Document updated with ID: ", payload.id);
-      dispatch( resetUser() )
-    })
-    .catch(error => {
-      console.error("Error adding document: ", error);
-    });
-}
-export const deleteUser =  (id) => dispatch => {
-  fireStore
-    .collection("/admin/iam/users")
-    .doc(id)
-    .delete()
-    .then(docRef => {
-      console.log("Document delete");
-    })
-    .catch(error => {
-      console.error("Error adding document: ", error);
-    });
-}
 export const updateUserKeyValue =  (payload) => dispatch => {
   dispatch({
     type: UPDATE_USER_KEY_VALUE,

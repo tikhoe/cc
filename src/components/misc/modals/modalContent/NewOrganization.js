@@ -15,6 +15,12 @@ import {
 
 class NewOrganization extends React.Component {
 
+        
+    componentWillUnmount(){
+        const { resetOrganization } = this.props
+        resetOrganization()
+    }
+
     render(){
 
         const { organization } = this.props

@@ -18,6 +18,13 @@ class DeleteUser extends React.Component {
             verification: ''
         }
     }
+
+        
+    componentWillUnmount(){
+        const { resetUser } = this.props
+        resetUser()
+    }
+
     render(){
 
         const { user, services } = this.props
@@ -61,7 +68,7 @@ class DeleteUser extends React.Component {
 
                 {
                     this.state.verification === user.email
-                    ?   <button className='pinkred-bg pullLeft' onClick={ () => { deleteUser(user.id); resetUser();  modalUpdate({ visible: 0, content: null, modalType: 0 }) } }>Delete User</button>
+                    ?   <button className='pinkred-bg pullLeft' onClick={ () => { deleteUser(user); resetUser();  modalUpdate({ visible: 0, content: null, modalType: 0 }) } }>Delete User</button>
                     :   <button className='gray-bg pullLeft' style={{ cursor: 'not-allowed' }}>Delete User</button>
                 }
                 <button className='gray-bg pullLeft' style={{ marginLeft: 10 }} onClick={ () => { resetUser();  modalUpdate({ visible: 0, content: null, modalType: 0 }) } }>Cancel</button>

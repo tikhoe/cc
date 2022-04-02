@@ -20,6 +20,12 @@ import './NewUser.css'
 
 class NewUser extends React.Component {
 
+        
+    componentWillUnmount(){
+        const { resetUser } = this.props
+        resetUser()
+    }
+
     render(){
 
         const { user, organizations, branches, services } = this.props

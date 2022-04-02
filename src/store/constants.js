@@ -29,9 +29,11 @@ export const TicketStatuses = {
     transferTicket: 0
 };
 
+export const isDev = process.env.NODE_ENV === "development";
+
 export const URLs = {
-    pubsub: '/localrmq/',
-    api: 'https://tikhoes-macbook-pro.local:4000'
+    api: 'http://localhost:9808/',
+    devApi: 'http://localhost:9808/',
 }
 
 export const navigation = [

@@ -13,6 +13,13 @@ import {
 
 
 class NewBranch extends React.Component {
+    
+        
+    componentWillUnmount(){
+        const { resetBranch } = this.props
+        resetBranch()
+    }
+
     closeForm(){
         console.log('closeForm');
         const { resetBranch, modalUpdate } = this.props

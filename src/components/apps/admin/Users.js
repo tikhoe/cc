@@ -16,7 +16,7 @@ class Users extends React.Component {
 
         return <>
             <div className="home-left-content">
-                <div className="col-two">
+                <div className="">
                     <div className="home-left-content5-wraper">
                         <div className="titleBlock">
                             <h4>Users</h4>
@@ -43,7 +43,7 @@ class Users extends React.Component {
                                                     }
                                                 </td>
                                                 <td>
-                                                    <span style={{cursor:'pointer'}} onClick={ () => { updateUserGetObject(data.id); modalUpdate({ visible: 1, content: "DeleteUser", modalType: 1 }) } }>Delete</span> . <span style={{cursor:'pointer'}} onClick={ () => { updateUserGetObject(data.id); modalUpdate({ visible: 1, content: "NewUser", modalType: 1 }) } }>Update</span>
+                                                    <span style={{cursor:'pointer'}} onClick={ () => { updateUserGetObject(data.id, 0); modalUpdate({ visible: 1, content: "DeleteUser", modalType: 1 }) } }>Delete</span> . <span style={{cursor:'pointer'}} onClick={ () => { updateUserGetObject(data.id); modalUpdate({ visible: 1, content: "NewUser", modalType: 1 }) } }>Update</span> . <span style={{cursor:'pointer'}} onClick={ () => { updateUserGetObject(data.id, 1); modalUpdate({ visible: 1, content: "NewUser", modalType: 1 }) } }>Password</span>
                                                 </td>
                                             </tr>)
                                     :   <tr>

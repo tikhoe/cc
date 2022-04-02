@@ -1,5 +1,6 @@
 import axios from 'axios'
 import dayjs from 'dayjs'
+import { toast } from "react-toastify";
 import { 
   FETCH_USERS,
   RESET_USER,
@@ -8,6 +9,7 @@ import {
   LISTEN_USERS,
   UPDATE_USER_KEY_VALUE,
   UPDATE_USER_GET_OBJECT,
+  UPDATE_USER_PASSWORD_GET_OBJECT
 } from './types';
 
 import { fireStore } from '../../firebase';
@@ -46,37 +48,54 @@ export const fetchUsers =  () => dispatch => {
 }
 
 export const addNewUser =  (payload) => dispatch => {
+  const toastId = dayjs().unix()
+  toast.info("Adding user", { toastId, autoClose: false });
+
+
   const data = { ...payload }
   data.created = dayjs().unix()
   delete data.updateStatus
   delete data.passwordStatus
-
+  
   axios
     .post('/users/', data)
     .then( () => {
       dispatch( resetUser() )
+      toast.dismiss(toastId);
+      toast.success("User was succesfully added");
     })
     .catch( err => {
       console.log(err);
+      toast.warn("Error adding user");
     })
 }
 
 export const updateUser =  (payload) => dispatch => {
+  const toastId = dayjs().unix()
+  toast.info("Updating user", { toastId, autoClose: false });
+
   var data = { ...payload }
   delete data.updateStatus
   delete data.passwordStatus
+  delete data.password
 
   axios
-    .post('/users/update', data)
+    .patch('/users/', data)
     .then( () => {
       dispatch( resetUser() )
+      toast.dismiss(toastId);
+      toast.success("User was succesfully updated");
     })
     .catch( err => {
       console.log(err);
+      toast.warn("Error updating user");
     })
 }
 
 export const deleteUser =  (user) => dispatch => {
+  const toastId = dayjs().unix()
+  toast.info("Deleting user", { toastId, autoClose: false });
+
   const { id, mysqlId } = user
   const data = { id, mysqlId }
 
@@ -84,9 +103,12 @@ export const deleteUser =  (user) => dispatch => {
     .delete('/users/', { data })
     .then( () => {
       dispatch( resetUser() )
+      toast.dismiss(toastId);
+      toast.success("User was succesfully deleted");
     })
     .catch( err => {
       console.log(err);
+      toast.warn("Error deleting user");
     })
 }
 
@@ -103,10 +125,11 @@ export const updateUserKeyValue =  (payload) => dispatch => {
   })
 }
 
-export const updateUserGetObject =  (payload) => dispatch => {
+export const updateUserGetObject =  (payload, passwordStatus) => dispatch => {
+  const type = passwordStatus ? UPDATE_USER_PASSWORD_GET_OBJECT : UPDATE_USER_GET_OBJECT
   console.log(payload);
   dispatch({
-    type: UPDATE_USER_GET_OBJECT,
+    type,
     payload
   })
 }

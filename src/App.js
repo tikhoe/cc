@@ -5,7 +5,9 @@ import {
   Switch,
   Route,
   Redirect
-} from "react-router-dom";
+} from "react-router-dom"
+import { ToastContainer } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 import Layout from "./pages/Layout";
 import DS from "./pages/DS";
@@ -32,7 +34,8 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-          <Layout>
+        <Layout>
+          <ToastContainer />
           <Modal />
           <Route exact path='/ds/:page/' component={DS}/>
           <Route exact path='/qm/' component={QM}/>

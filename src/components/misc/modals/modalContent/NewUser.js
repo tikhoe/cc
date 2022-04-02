@@ -51,24 +51,38 @@ class NewUser extends React.Component {
                     user.organizationId !== ''
                     ?   (
                         <>
-                            <div className="input-options">
-                                <label>Enter Name</label>
-                                <input type="text" placeholder="Name" value={user.name} onChange={ (e) => updateUserKeyValue( { name: e.target.value }) } />
-                            </div>
-                            <div className="input-options">
-                                <label>Enter Lastname</label>
-                                <input type="text" placeholder="Lastname"  value={user.lastname} onChange={ (e) => updateUserKeyValue( { lastname: e.target.value }) } />
-                            </div>
+                            {
+                                (
+                                    !user.updateStatus  || ( user.updateStatus && !user.passwordStatus )
+                                )
+                                    ?   <>
+                                            <div className="input-options">
+                                                <label>Enter Name</label>
+                                                <input type="text" placeholder="Name" value={user.name} onChange={ (e) => updateUserKeyValue( { name: e.target.value }) } />
+                                            </div>
+                                            <div className="input-options">
+                                                <label>Enter Lastname</label>
+                                                <input type="text" placeholder="Lastname"  value={user.lastname} onChange={ (e) => updateUserKeyValue( { lastname: e.target.value }) } />
+                                            </div>
 
-                            <div className="input-options">
-                                <label>Email address</label>
-                                <input type="email" placeholder="Email"  value={user.email} onChange={ (e) => updateUserKeyValue( { email: e.target.value }) } />
-                            </div>
+                                            <div className="input-options">
+                                                <label>Email address</label>
+                                                <input type="email" placeholder="Email"  value={user.email} onChange={ (e) => updateUserKeyValue( { email: e.target.value }) } />
+                                            </div>
+                                        </>
+                                    :   null
+                            }
+                            
 
-                            <div className="input-options">
-                                <label>Enter Password</label>
-                                <input type="password" placeholder="Password" autoComplete="new-password"  value={user.password} onChange={ (e) => updateUserKeyValue( { password: e.target.value }) } />
-                            </div>
+                            {
+                                !user.updateStatus  || ( user.updateStatus && user.passwordStatus )
+                                    ?   <div className="input-options">
+                                            <label>Enter Password</label>
+                                            <input type="password" placeholder="Password" autoComplete="new-password"  value={user.password} onChange={ (e) => updateUserKeyValue( { password: e.target.value }) } />
+                                        </div>
+                                    :   null
+                            }
+                            
                         </>
                     )
                     :   null
@@ -77,49 +91,55 @@ class NewUser extends React.Component {
 
                 
                 {
-                    user.organizationId !== '' && user.name !== '' && user.lastname !== '' && user.email !== '' && user.password !== ''
-                    ?   (
-                        <div style={{ padding:"15px 0", display: "flex" }}>
-                            <Toggle
-                                id='agentStatus'
-                                defaultChecked={ Number(user.agentStatus) === 1 ? true : false }
-                                onChange={ (e) => updateUserKeyValue( { agentStatus: e.target.checked ? 1 : 0 }) }
-                            />
-                            <label htmlFor='agentStatus' style={{ padding: "2px 0 0 10px" }}>{ Number(user.agentStatus) ? "Yes, user is a support agent" : "No, user is not a support agent"}</label>
-                        </div>
+                    (
+                        ( user.organizationId !== '' && user.name !== '' && user.lastname !== '' && user.email !== '' && user.password !== '' ) &&
+                        ( !user.updateStatus  || ( user.updateStatus && !user.passwordStatus ) )
                     )
-                    :   null
-                }
-                
-                {
-                    user.organizationId !== '' && user.name !== '' && user.lastname !== '' && user.email !== '' && user.password !== '' && Number(user.agentStatus) === 1
-                    ?   (
-                        <>
-                            <div className="select-options">
-                                <label>Select Branch</label>
-                                <div className="selectStyling">
-                                    <select value={user.branchId} onChange={ (e) => updateUserKeyValue( { branchId: e.target.value }) }>
-                                        <option value="">Select a Branch</option>
-                                        {
-                                            branches.filter(branch => branch.organizationId === user.organizationId).map( (branch, index) => <option key={index} value={branch.id}>{branch.name}</option> )
-                                        }
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div className="select-options">
-                                <label>Services</label>
-                                <Select
-                                    defaultValue={ services.filter(data => user.services.includes(data.id) ).map(data => { return  {value:data.id, label:data.name} } ) }
-                                    isMulti
-                                    components={ Animated() }
-                                    options={ services.filter(data => data.organizationId === user.organizationId).map(data => { return  {value:data.id, label:data.name} } ) }
-                                    onChange={ (e) => updateUserKeyValue({ services: e.map(data => { return data.value} ) }) }
+                        ?   (
+                            <div style={{ padding:"15px 0", display: "flex" }}>
+                                <Toggle
+                                    id='agentStatus'
+                                    defaultChecked={ Number(user.agentStatus) === 1 ? true : false }
+                                    onChange={ (e) => updateUserKeyValue( { agentStatus: e.target.checked ? 1 : 0 }) }
                                 />
+                                <label htmlFor='agentStatus' style={{ padding: "2px 0 0 10px" }}>{ Number(user.agentStatus) ? "Yes, user is a support agent" : "No, user is not a support agent"}</label>
                             </div>
-                        </>
+                        )
+                        :   null
+                }
+                
+                {
+                    (
+                        ( user.organizationId !== '' && user.name !== '' && user.lastname !== '' && user.email !== '' && user.password !== '' && Number(user.agentStatus) === 1 ) &&
+                        ( !user.updateStatus  || ( user.updateStatus && !user.passwordStatus ) )
                     )
-                    :   null
+                        ?   (
+                            <>
+                                <div className="select-options">
+                                    <label>Select Branch</label>
+                                    <div className="selectStyling">
+                                        <select value={user.branchId} onChange={ (e) => updateUserKeyValue( { branchId: e.target.value }) }>
+                                            <option value="">Select a Branch</option>
+                                            {
+                                                branches.filter(branch => branch.organizationId === user.organizationId).map( (branch, index) => <option key={index} value={branch.id}>{branch.name}</option> )
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div className="select-options">
+                                    <label>Services</label>
+                                    <Select
+                                        defaultValue={ services.filter(data => user.services.includes(data.id) ).map(data => { return  {value:data.id, label:data.name} } ) }
+                                        isMulti
+                                        components={ Animated() }
+                                        options={ services.filter(data => data.organizationId === user.organizationId).map(data => { return  {value:data.id, label:data.name} } ) }
+                                        onChange={ (e) => updateUserKeyValue({ services: e.map(data => { return data.value} ) }) }
+                                    />
+                                </div>
+                            </>
+                        )
+                        :   null
                 }
                 {
                     (

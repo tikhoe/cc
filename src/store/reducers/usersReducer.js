@@ -7,6 +7,7 @@ import {
   DELETE_USER,
   UPDATE_USER_KEY_VALUE,
   UPDATE_USER_GET_OBJECT,
+  UPDATE_USER_PASSWORD_GET_OBJECT
 } from '../actions/types';
 import { userDefault } from '../constants'
 
@@ -30,7 +31,12 @@ export default function reducerCase(state = initialState, action) {
     case UPDATE_USER_GET_OBJECT:
       return {
         ...state,
-        user: { ...state.users.find(user => user.id === action.payload ), updateStatus: 1 }
+        user: { ...state.users.find(user => user.id === action.payload ), updateStatus: 1, passwordStatus: 0 }
+      };
+    case UPDATE_USER_PASSWORD_GET_OBJECT:
+      return {
+        ...state,
+        user: { ...state.users.find(user => user.id === action.payload ), updateStatus: 1, passwordStatus: 1, password: '' },
       };
     case RESET_USER:
       return {

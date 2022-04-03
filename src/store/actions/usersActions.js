@@ -21,16 +21,16 @@ axios.defaults.baseURL = !isDev ? api : devApi
 export const listenUsers =  () => dispatch => {
   console.log('listenUsers');
   fireStore
-  .collection('/admin/iam/users')
-  .onSnapshot((snapshot) => {
-    let users = snapshot.docs.map( doc => { return { ...doc.data(), id: doc.id } })
-    console.log(users);
-    users.sort((a, b) => ( a.name > b.name ) ? 1 : (( b.name > a.name ) ? -1 : 0 ))
-    dispatch({
-      type: LISTEN_USERS,
-      payload: users
+    .collection('/admin/iam/users')
+    .onSnapshot((snapshot) => {
+      let users = snapshot.docs.map( doc => { return { ...doc.data(), id: doc.id } })
+      console.log(users);
+      users.sort((a, b) => ( a.name > b.name ) ? 1 : (( b.name > a.name ) ? -1 : 0 ))
+      dispatch({
+        type: LISTEN_USERS,
+        payload: users
+      })
     })
-  })
 }
 
 export const fetchUsers =  () => dispatch => {
@@ -56,6 +56,10 @@ export const addNewUser =  (payload) => dispatch => {
   data.created = dayjs().unix()
   delete data.updateStatus
   delete data.passwordStatus
+
+  // agentStatus === 0 resets
+  data.branchId = !data.agentStatus ? '' : data.branchId
+  data.services = !data.agentStatus ? [] : data.services
   
   axios
     .post('/users/', data)
@@ -79,6 +83,10 @@ export const updateUser =  (payload) => dispatch => {
   delete data.passwordStatus
   delete data.password
 
+  // agentStatus === 0 resets
+  data.branchId = !data.agentStatus ? '' : data.branchId
+  data.services = !data.agentStatus ? [] : data.services
+
   axios
     .patch('/users/', data)
     .then( () => {
@@ -89,6 +97,25 @@ export const updateUser =  (payload) => dispatch => {
     .catch( err => {
       console.log(err);
       toast.warn("Error updating user");
+    })
+}
+
+export const updatePassword =  (payload) => dispatch => {
+  const toastId = dayjs().unix()
+  toast.info("Updating password", { toastId, autoClose: false });
+  const { id, mysqlId, password } = payload
+  var data = { id, mysqlId, password }
+
+  axios
+    .patch('/users/password', data)
+    .then( () => {
+      dispatch( resetUser() )
+      toast.dismiss(toastId);
+      toast.success("Password was succesfully updated");
+    })
+    .catch( err => {
+      console.log(err);
+      toast.warn("Error updating password");
     })
 }
 

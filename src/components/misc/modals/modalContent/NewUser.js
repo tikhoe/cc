@@ -9,6 +9,7 @@ import {
     updateUserKeyValue,
     addNewUser,
     updateUser,
+    updatePassword,
     resetUser
 } from "../../../../store/actions/usersActions";
 
@@ -29,30 +30,37 @@ class NewUser extends React.Component {
     render(){
 
         const { user, organizations, branches, services } = this.props
-        const { addNewUser, updateUser, updateUserKeyValue, resetUser, modalUpdate } = this.props
+        const { addNewUser, updateUser, updatePassword, updateUserKeyValue, resetUser, modalUpdate } = this.props
 
         return (
             <>  
                <h5>Add New User</h5>
 
-                <div className="select-options">
-                    <label>Select Organization</label>
-                    <div className="selectStyling">
-                        <select value={user.organizationId} onChange={ (e) => updateUserKeyValue( { organizationId: e.target.value }) }>
-                            <option value="">Select an Organization</option>
-                            {
-                                organizations.map( (organization, index) => <option key={index} value={organization.id}>{organization.name}</option> )
-                            }
-                        </select>
-                    </div>
-                </div>
+                {
+                    // do not show the organization if the user wants to change the password
+                    !user.updateStatus  || ( user.updateStatus && !user.passwordStatus )
+                        ?   <div className="select-options">
+                                <label>Select Organization</label>
+                                <div className="selectStyling">
+                                    <select value={user.organizationId} onChange={ (e) => updateUserKeyValue( { organizationId: e.target.value }) }>
+                                        <option value="">Select an Organization</option>
+                                        {
+                                            organizations.map( (organization, index) => <option key={index} value={organization.id}>{organization.name}</option> )
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        :   null
+                }
+                
 
                 {
                     user.organizationId !== ''
                     ?   (
                         <>
                             {
-                                (
+                                (   
+                                    // do not show the below if the user wants to change the password
                                     !user.updateStatus  || ( user.updateStatus && !user.passwordStatus )
                                 )
                                     ?   <>
@@ -74,7 +82,8 @@ class NewUser extends React.Component {
                             }
                             
 
-                            {
+                            {   
+                                // do not show the password if the user wants to update their details
                                 !user.updateStatus  || ( user.updateStatus && user.passwordStatus )
                                     ?   <div className="input-options">
                                             <label>Enter Password</label>
@@ -90,7 +99,8 @@ class NewUser extends React.Component {
                 
 
                 
-                {
+                {   
+                    // do not show the agentStatus if the user wants to change the password
                     (
                         ( user.organizationId !== '' && user.name !== '' && user.lastname !== '' && user.email !== '' && user.password !== '' ) &&
                         ( !user.updateStatus  || ( user.updateStatus && !user.passwordStatus ) )
@@ -99,7 +109,7 @@ class NewUser extends React.Component {
                             <div style={{ padding:"15px 0", display: "flex" }}>
                                 <Toggle
                                     id='agentStatus'
-                                    defaultChecked={ Number(user.agentStatus) === 1 ? true : false }
+                                    defaultChecked={ user.agentStatus ? true : false }
                                     onChange={ (e) => updateUserKeyValue( { agentStatus: e.target.checked ? 1 : 0 }) }
                                 />
                                 <label htmlFor='agentStatus' style={{ padding: "2px 0 0 10px" }}>{ Number(user.agentStatus) ? "Yes, user is a support agent" : "No, user is not a support agent"}</label>
@@ -109,6 +119,7 @@ class NewUser extends React.Component {
                 }
                 
                 {
+                    // do not show the branch / services if the user wants to change the password
                     (
                         ( user.organizationId !== '' && user.name !== '' && user.lastname !== '' && user.email !== '' && user.password !== '' && Number(user.agentStatus) === 1 ) &&
                         ( !user.updateStatus  || ( user.updateStatus && !user.passwordStatus ) )
@@ -147,7 +158,9 @@ class NewUser extends React.Component {
                         (user.organizationId !== '' && user.name !== '' && user.lastname !== '' && user.email !== '' && user.password !== '' && Number(user.agentStatus) === 0)
                     )
                     ?   user.updateStatus
-                        ?   <button className='purple-bg pullLeft' onClick={ () => { updateUser(user); modalUpdate({ visible: 0, content: null, modalType: 0 }) } }>Update User</button>
+                        ?   user.passwordStatus
+                                ?   <button className='purple-bg pullLeft' onClick={ () => { updatePassword(user); modalUpdate({ visible: 0, content: null, modalType: 0 }) } }>Update Password</button>
+                                :   <button className='purple-bg pullLeft' onClick={ () => { updateUser(user); modalUpdate({ visible: 0, content: null, modalType: 1 }) } }>Update User</button>
                         :   <button className='purple-bg pullLeft' onClick={ () => { addNewUser(user); modalUpdate({ visible: 0, content: null, modalType: 0 }) } }>Add User</button>
                     :   <button className='gray-bg pullLeft' style={{ cursor: 'not-allowed' }}>Add User</button>
                 }
@@ -171,6 +184,7 @@ export default connect(mapStateToProps, {
     updateUserKeyValue,
     addNewUser,
     updateUser,
+    updatePassword,
     resetUser,
     modalUpdate
 })(NewUser);

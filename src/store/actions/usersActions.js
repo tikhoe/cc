@@ -2,6 +2,9 @@ import axios from 'axios'
 import dayjs from 'dayjs'
 import { toast } from "react-toastify";
 import { 
+  AUTHENTICATE_AGENT,
+  AUTHENTICATION_ERROR,
+  UNAUTHENTICATE_AGENT,
   FETCH_USERS,
   RESET_USER,
   UPDATE_USER,
@@ -14,17 +17,14 @@ import {
 
 import { fireStore } from '../../firebase';
 import { URLs, isDev } from '../constants'
-const { api, devApi, pubsub } = URLs
+const { api, devApi } = URLs
 axios.defaults.baseURL = !isDev ? api : devApi
 
-
 export const listenUsers =  () => dispatch => {
-  console.log('listenUsers');
   fireStore
     .collection('/admin/iam/users')
     .onSnapshot((snapshot) => {
       let users = snapshot.docs.map( doc => { return { ...doc.data(), id: doc.id } })
-      console.log(users);
       users.sort((a, b) => ( a.name > b.name ) ? 1 : (( b.name > a.name ) ? -1 : 0 ))
       dispatch({
         type: LISTEN_USERS,
@@ -158,5 +158,40 @@ export const updateUserGetObject =  (payload, passwordStatus) => dispatch => {
   dispatch({
     type,
     payload
+  })
+}
+
+export const authenticateAgent = authenticationData => dispatch => {
+  if (!authenticationData.counterId.length) {
+    toast.warning("Counter is required");
+    return
+  }
+
+  if (!authenticationData.email.length || !authenticationData.password.length) {
+    toast.error("Email & Password are required");
+    return
+  }
+
+  axios
+    .post( api + '/agents/authenticate', authenticationData )
+    .then(res => {
+      const payload = res.data
+      const type = payload.status
+      ? AUTHENTICATE_AGENT
+      : AUTHENTICATION_ERROR
+      dispatch({
+        type,
+        payload
+      })
+    })
+    .catch(err => {
+      toast.error("Invalid Email or Password");
+    })
+};
+
+export const unauthenticateAgent = () => dispatch => {
+  dispatch({
+    type: UNAUTHENTICATE_AGENT,
+    payload: {}
   })
 }

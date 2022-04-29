@@ -9,7 +9,7 @@ const initialState = {
         content: null,
         modalType: 1
     },
-    currentApp:"ds"
+    currentApp:"apps"
     
 };
 

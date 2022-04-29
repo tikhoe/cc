@@ -12,6 +12,8 @@ import {
 import { userDefault } from '../constants'
 
 const initialState = {
+  appStatus: 0,
+  userAuthenticated: 0,
   users: [],
   user: userDefault,
 };

@@ -10,6 +10,8 @@ import { ToastContainer } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
 
 import Layout from "./pages/Layout";
+import SignIn from "./pages/SignIn";
+import Apps from "./pages/Apps";
 import DS from "./pages/DS";
 import QM from "./pages/QM";
 import CF from "./pages/CF";
@@ -32,22 +34,46 @@ class App extends React.Component {
   }
 
   render() {
+    const { currentApp, appStatus, userAuthenticated } = this.props
+
+    let redirectLocation = !appStatus
+      ? '/login/'
+      : !userAuthenticated
+        ? '/verify/'
+        : ''
+
+    redirectLocation = redirectLocation.length
+      ? redirectLocation
+      : '/' + currentApp + '/'
+    
     return (
       <Router>
-        <Layout>
-          <ToastContainer />
-          <Modal />
-          <Route exact path='/ds/:page/' component={DS}/>
-          <Route exact path='/qm/' component={QM}/>
-          <Route exact path='/cf/' component={CF}/>
-          <Route exact path='/admin/:page?/' component={Admin}/>
-          <Switch>
-            <Redirect exact from="/ds/" to="/ds/dashboard/" />
-            <Redirect exact from="/qm/" to="/qm/dashboard/" />
-            <Redirect exact from="/cf/" to="/cf/dashboard/" />
-
-          </Switch>
-        </Layout>
+        {
+          !appStatus
+            ? <Route exact path='/sign-in/' component={SignIn}/>
+            : !userAuthenticated
+              ? <Route exact path='/sign-in/' component={SignIn}/>
+              : currentApp === "apps" 
+                  ? (
+                    <Route exact path='/apps/' component={Apps}/>
+                  )
+                  : (
+                      <Layout>
+                        <ToastContainer />
+                        <Modal />
+                        <Route exact path='/ds/:page/' component={DS}/>
+                        <Route exact path='/qm/' component={QM}/>
+                        <Route exact path='/cf/' component={CF}/>
+                        <Route exact path='/admin/:page?/' component={Admin}/>
+                        <Switch>
+                          <Redirect exact from="/" to={ redirectLocation } />
+                          <Redirect exact from="/ds/" to="/ds/dashboard/" />
+                          <Redirect exact from="/qm/" to="/qm/dashboard/" />
+                          <Redirect exact from="/cf/" to="/cf/dashboard/" />
+                        </Switch>
+                      </Layout>
+                    )
+        }
       </ Router>
     );
   }
@@ -55,9 +81,12 @@ class App extends React.Component {
 
 
 const mapStateToProps = state => {
-  const { users } = state;
+  const { users, settings } = state;
   return {
-      user: users.user
+      user: users.user,
+      appStatus: users.appStatus,
+      userAuthenticated: users.userAuthenticated,
+      currentApp: settings.currentApp
   }
 }
 

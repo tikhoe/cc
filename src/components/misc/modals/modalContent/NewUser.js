@@ -24,7 +24,7 @@ class NewUser extends React.Component {
         
     componentWillUnmount(){
         const { resetUser } = this.props
-        resetUser()
+        // resetUser()
     }
 
     render(){

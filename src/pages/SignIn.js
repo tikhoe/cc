@@ -2,8 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import DayJS from "react-dayjs";
-import { authenticateAgent } from "../store/actions/agentsActions";
-import { storeCounterId } from "../store/actions/countersActions";
+import { authenticateAgent } from "../store/actions/usersActions";
 
 import "../assets/css/SignIn.css";
 class SignIn extends React.Component {
@@ -13,8 +12,6 @@ class SignIn extends React.Component {
       appStatus: 0,
       email: "",
       password: "",
-      counterId: "",
-      error: 0,
     };
     this.signIn = this.signIn.bind(this);
   }
@@ -24,13 +21,9 @@ class SignIn extends React.Component {
   }
   signIn(e) {
     e.preventDefault();
-    const { counterId, email, password } = this.state;
-    if (!counterId.length || !email.length || !password.length) {
-      this.setState({ error: 1 });
-      return;
-    }
-    this.props.authenticateAgent({ email: email.toLowerCase(), password });
-    this.props.storeCounterId(counterId);
+    const { email, password } = this.state;
+    const { counterId } = this.props
+    this.props.authenticateAgent({ email: email.toLowerCase(), password, counterId });;
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -41,12 +34,7 @@ class SignIn extends React.Component {
   }
 
   render() {
-    const error =
-      this.state.error !== 0
-        ? this.state.error === 1
-          ? "Counter, email and password are required"
-          : "Invalid email or password"
-        : "";
+
     return (
       <div className="signInComponent">
         <div>
@@ -121,25 +109,6 @@ class SignIn extends React.Component {
           </svg>
 
           <form onSubmit={this.signIn}>
-            <div className="errorMsg">{error}</div>
-            <div className="select-options">
-              <label>Counter/Station</label>
-              <div className="selectStyling">
-                <select
-                  name="counterId"
-                  value={this.state.counterId}
-                  onChange={(e) => this.onChange(e)}
-                >
-                  <option value="">Select your counter/station</option>
-                  {this.props.counters.map((data, index) => (
-                    <option value={data.id} key={index}>
-                      {data.type}
-                      {data.number != null ? " " + data.number : ""}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
             <div className="input-options">
               <label>Email</label>
               <div className="selectStyling">
@@ -170,8 +139,7 @@ class SignIn extends React.Component {
           </form>
 
           <p className="copyright">
-            Copyright <DayJS format="YYYY"></DayJS> Averly. Agent Management
-            Console
+            Copyright <DayJS format="YYYY"></DayJS> Averly. Agent Management Console
           </p>
         </div>
 
@@ -337,16 +305,17 @@ SignIn.propTypes = {
 };
 
 const mapStateToProps = (state) => {
+  const { counters, agents } = state
   return {
-    agents: state.agents.agents,
-    authenticatedAgent: state.agents.authenticatedAgent,
-    appStatus: state.agents.appStatus,
-    authenticationError: state.agents.authenticationError,
-
-    counters: state.counters.counters,
+    agents: agents.agents,
+    authenticatedAgent: agents.authenticatedAgent,
+    appStatus: agents.appStatus,
+    authenticationError: agents.authenticationError,
+    counters: counters.counters,
+    counterId: counters.counterId,
   };
 };
 
-export default connect(mapStateToProps, { authenticateAgent, storeCounterId })(
+export default connect(mapStateToProps, { authenticateAgent })(
   SignIn
 );

@@ -5,8 +5,7 @@ import {
   LISTEN_COUNTERS_CREATE,
   LISTEN_COUNTERS_UPDATE,
   LISTEN_COUNTERS_DELETE,
-  FETCH_COUNTERS,
-  STORE_SIGNIN_COUNTERID
+  FETCH_COUNTERS
 } from './types';
 import { URLs } from '../constants'
 
@@ -50,12 +49,4 @@ export const fetchCounters = () => dispatch => {
       payload: res.data
     })
   );
-};
-
-export const storeCounterId = (payload) => dispatch => {
-  dispatch({
-    type: STORE_SIGNIN_COUNTERID,
-    payload
-  })
-
 };

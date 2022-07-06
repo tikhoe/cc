@@ -5,29 +5,56 @@ import {
   Navigate,
   Routes,
 } from "react-router-dom";
+import { connect } from "react-redux";
+import '../src/assets/css/main/bootstrap.min.css'
+import '../src/assets/css/main/all.min.css'
+import '../src/assets/css/main/icofont.min.css'
+import '../src/assets/css/main/select2.min.css'
+import '../src/assets/css/main/osahan.css'
+import '../src/assets/css/main/owl.carousel.css'
+import '../src/assets/css/main/owl.theme.css'
 
-import Layout from "./pages/Layout";
-import DS from "./pages/DS";
-import QM from "./pages/QM";
-import CF from "./pages/CF";
-import Admin from "./pages/Admin";
+
+//Pages
+import ParentLayout from "./pages/ParentLayout";
+import Home from "./pages/Home";
+import SignIn from "./pages/SignIn";
 import User from "./pages/User";
+import Offers from "./pages/Offers";
+import Checkout from "./pages/Checkout";
+import Restaurant from "./pages/Restaurant";
+import Restaurants from "./pages/Restaurants";
+import SignUp from "./pages/SignUp";
+
+
+//Actions
 
 class App extends React.Component {
   // use the url to determine which page to show, instead of hard coding
+
+  componentDidMount(){
+  }
+
   render() {
     return <Router>
-      <Layout>
-          <Routes>
-              <Route path="/ds/:page/" element={<DS/>} />
-              <Route path="/qm/" element={<QM/>} />
-              <Route path="/cf/" element={CF} />
-              <Route path="/admin/" element={<Admin/>} />
-              <Route path="/admin/users/" element={<User/>} />
-          </Routes>
-        </Layout>;
-    </ Router>
+                  <Routes>
+                      <Route path="/" element={<Home/>} />
+                      <Route path="/accounts/sign-in" element={<SignIn/>} />
+                      <Route path="/accounts/sign-up" element={<SignUp/>} />
+                      <Route path="/accounts" element={<User/>} />
+                      <Route path="/offers" element={<Offers/>} />
+                      <Route path="/checkout" element={<Checkout/>} />
+                      <Route path="/restaurant/home" element={<Restaurant/>} />
+                      <Route path="/restaurants" element={<Restaurants/>} />
+                  </Routes>
+          </ Router>
   }
 }
 
-export default App
+const mapStateToProps = (state) =>{
+const { admin } = state; 
+
+}
+
+export default connect(mapStateToProps, {
+})(App);

@@ -160,38 +160,120 @@ export const navigation = [
     }
 ]
 
-export const Apps = [
+export const FoodCategories = [
     {
-        name:"Digital Signage",
-        slug:"/ds/",
+        name: "Pizza",
+        count: 167
+    },
+    {
+        name: "Pizza",
+        count: 167
+    },
+    {
+        name: "Pizza",
+        count: 167
+    },
+    {
+        name: "Pizza",
+        count: 167
+    },
+    {
+        name: "Pizza",
+        count: 167
+    },
+    {
+        name: "Pizza",
+        count: 167
+    }
+    ,
+    {
+        name: "Pizza",
+        count: 167
+    }
+    ,
+    {
+        name: "Pizza",
+        count: 167
+    }
+    ,
+    {
+        name: "Pizza",
+        count: 167
+    }
+]
+
+export const RestaurantsList = [
+    {
+        name:"Furstenhof Restaurant & Bar",
+        image:"1.png",
         icon:"",
         shortName:'ds'
     },
     {
-        name:"Queue Management",
-        slug:"/qm/",
+        name:"Neptunes Coffee Shop",
+        image:"2.png",
         icon:"",
         shortName:'qm'
     },
     {
         name:"Customer Feedback",
-        slug:"/cf/",
+        image:"3.png",
         icon:"",
         shortName:'cf'
     },
     {
         name:"Admin",
-        slug:"/admin/",
+        image:"4.png",
+        icon:"",
+        shortName:'admin'
+    },
+    {
+        name:"Digital Signage",
+        image:"1.png",
+        icon:"",
+        shortName:'ds'
+    },
+    {
+        name:"Queue Management",
+        image:"2.png",
+        icon:"",
+        shortName:'qm'
+    },
+    {
+        name:"Customer Feedback",
+        image:"3.png",
+        icon:"",
+        shortName:'cf'
+    },
+    {
+        name:"Admin",
+        image:"4.png",
+        icon:"",
+        shortName:'admin'
+    },
+    {
+        name:"Digital Signage",
+        image:"1.png",
+        icon:"",
+        shortName:'ds'
+    },
+    {
+        name:"Queue Management",
+        image:"2.png",
+        icon:"",
+        shortName:'qm'
+    },
+    {
+        name:"Customer Feedback",
+        image:"3.png",
+        icon:"",
+        shortName:'cf'
+    },
+    {
+        name:"Admin",
+        image:"4.png",
         icon:"",
         shortName:'admin'
     }
 ]
 
-export const UsersPage = {
-    config:{
-        pageTitle: "Users",
-        subTitle: "Users that can manage and access the Averly Customer Experience Suite.",
-        form: {to: "/admin/user-update/"},
-        label:"Add a new user"
-    }
-};
